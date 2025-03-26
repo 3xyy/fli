@@ -1,0 +1,8 @@
+.confetti-particle {
+  position: absolute;
+  transition: transform 0.1s linear;
+}
+
+.confetti-dot {
+  border-radius: 9999px;
+} 
