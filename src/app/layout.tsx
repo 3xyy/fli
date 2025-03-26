@@ -18,6 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Future Leaders Initiative",
   description: "Empowering the next generation with practical business education and entrepreneurial skills",
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+  },
 };
 
 export default function RootLayout({
