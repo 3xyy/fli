@@ -13,9 +13,8 @@ export default function Footer() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = id === 'registration' ? -500 : 100; // Updated to match navbar offset
       window.scrollTo({
-        top: element.offsetTop - offset,
+        top: element.offsetTop - 100, // Offset by navbar height
         behavior: 'smooth'
       });
     }
