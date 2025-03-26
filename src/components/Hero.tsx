@@ -9,7 +9,7 @@ export default function Hero() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = id === 'registration' ? -500 : 80; // Updated to match navbar offset
+      const offset = id === 'registration' ? -500 : 80; // Added custom offset for registration
       window.scrollTo({
         top: element.offsetTop - offset,
         behavior: 'smooth'
@@ -36,17 +36,29 @@ export default function Hero() {
           Empowering the next generation with practical business education and entrepreneurial skills
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <Button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg h-auto"
+          <a 
+            href="#registration" 
+            onClick={(e) => scrollToSection(e, 'registration')}
+            className="w-full sm:w-auto"
           >
-            <a href="#registration" onClick={(e) => scrollToSection(e, 'registration')}>Register Now</a>
-          </Button>
-          <Button
-            variant="outline"
-            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-6 text-lg h-auto"
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg h-auto w-full"
+            >
+              Register Now
+            </Button>
+          </a>
+          <a 
+            href="#donate" 
+            onClick={(e) => scrollToSection(e, 'donate')}
+            className="w-full sm:w-auto"
           >
-            <a href="#donate" onClick={(e) => scrollToSection(e, 'donate')}>Donate</a>
-          </Button>
+            <Button
+              variant="outline"
+              className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-6 text-lg h-auto w-full"
+            >
+              Donate
+            </Button>
+          </a>
         </div>
         <div className="mt-16 p-4 bg-blue-100 rounded-lg inline-block">
           <p className="text-blue-800 font-medium">
