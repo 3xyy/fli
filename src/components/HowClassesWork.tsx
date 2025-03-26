@@ -6,9 +6,8 @@ export default function HowClassesWork() {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const offset = id === 'registration' ? -500 : 80; // Updated to match navbar offset
       window.scrollTo({
-        top: element.offsetTop - offset,
+        top: element.offsetTop - 80, // Offset by navbar height
         behavior: 'smooth'
       });
     }
