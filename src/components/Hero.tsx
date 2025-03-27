@@ -66,7 +66,7 @@ export default function Hero() {
           </p>
         </div>
         <div className="mt-8 flex justify-center gap-8">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Instagram">
+          <a href="https://www.instagram.com/fl_initiative" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Instagram">
             <Image src="/instagram.png" alt="Instagram" width={40} height={40} />
           </a>
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Facebook">
