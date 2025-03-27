@@ -83,7 +83,7 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col items-center">
           <div className="flex justify-center gap-8 mb-8">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Instagram">
+            <a href="https://www.instagram.com/fl_initiative" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Instagram">
               <Image src="/instagram.png" alt="Instagram" width={32} height={32} />
             </a>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Facebook">
