@@ -217,7 +217,7 @@ export default function Registration() {
                   name="contactMethod"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Best Contact Method for Student & Parent (If email, leave blank)</FormLabel>
+                      <FormLabel>Best Contact Method for Student & Parent (Optional)</FormLabel>
                       <FormControl>
                         <Input placeholder="Preferred contact method" {...field} />
                       </FormControl>
