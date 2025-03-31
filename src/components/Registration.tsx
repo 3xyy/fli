@@ -203,9 +203,9 @@ export default function Registration() {
                   name="parentPhone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Parent Phone Number (Optional)</FormLabel>
+                      <FormLabel>Parent Phone Number *</FormLabel>
                       <FormControl>
-                        <Input placeholder="Parent/guardian phone number" {...field} />
+                        <Input placeholder="Parent/guardian phone number" required {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
