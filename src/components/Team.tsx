@@ -7,38 +7,34 @@ import { Textarea } from '@/components/ui/textarea';
 import Image from 'next/image';
 
 export default function Team() {
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    topic: '',
-    organization: '',
-    message: ''
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setContactForm(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Contact form submitted:', contactForm);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setContactForm({
-        name: '',
-        email: '',
-        topic: '',
-        organization: '',
-        message: ''
+    
+    try {
+      const form = e.target as HTMLFormElement;
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
       });
-    }, 1500);
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+      } else {
+        console.error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,7 +69,12 @@ export default function Team() {
             </div>
 
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form 
+                action="https://formspree.io/f/mgvapadr" 
+                method="POST" 
+                onSubmit={handleSubmit} 
+                className="space-y-4"
+              >
                 <h4 className="text-xl font-semibold text-blue-800 mb-3">Contact Form</h4>
 
                 <div>
@@ -81,8 +82,6 @@ export default function Team() {
                   <Input
                     id="name"
                     name="name"
-                    value={contactForm.name}
-                    onChange={handleInputChange}
                     placeholder="Your name"
                     required
                   />
@@ -94,8 +93,6 @@ export default function Team() {
                     id="email"
                     name="email"
                     type="email"
-                    value={contactForm.email}
-                    onChange={handleInputChange}
                     placeholder="Your email"
                     required
                   />
@@ -106,8 +103,6 @@ export default function Team() {
                   <Input
                     id="topic"
                     name="topic"
-                    value={contactForm.topic}
-                    onChange={handleInputChange}
                     placeholder="Inquiry topic"
                     required
                   />
@@ -118,8 +113,6 @@ export default function Team() {
                   <Input
                     id="organization"
                     name="organization"
-                    value={contactForm.organization}
-                    onChange={handleInputChange}
                     placeholder="Your organization"
                   />
                 </div>
@@ -129,8 +122,6 @@ export default function Team() {
                   <Textarea
                     id="message"
                     name="message"
-                    value={contactForm.message}
-                    onChange={handleInputChange}
                     placeholder="Your message"
                     rows={4}
                     required
