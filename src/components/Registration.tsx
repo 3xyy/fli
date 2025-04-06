@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
+import React from 'react';
 
 type FormValues = {
   fullName: string;
@@ -32,32 +33,31 @@ export default function Registration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const form = useForm<FormValues>({
-    defaultValues: {
-      fullName: '',
-      grade: '',
-      age: '',
-      email: '',
-      school: '',
-      parentName: '',
-      parentEmail: '',
-      parentPhone: '',
-      contactMethod: '',
-      source: '',
-      questions: ''
-    }
-  });
-
-  const onSubmit = (data: FormValues) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', data);
+    
+    try {
+      const form = e.target as HTMLFormElement;
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        form.reset();
+      } else {
+        console.error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      form.reset();
-    }, 1500);
+    }
   };
 
   return (
@@ -96,173 +96,133 @@ export default function Registration() {
               </Button>
             </div>
           ) : (
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
+            <form 
+              action="https://formspree.io/f/mgvapadr" 
+              method="POST" 
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              <div>
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                <Input
+                  id="fullName"
                   name="fullName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Full Name *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your full name" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Enter your full name"
+                  required
                 />
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-1">Grade *</label>
+                  <Input
+                    id="grade"
                     name="grade"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Grade *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g. 10th" required {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="age"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Age *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Your age" required {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+                    placeholder="e.g. 10th"
+                    required
                   />
                 </div>
 
-                <FormField
-                  control={form.control}
+                <div>
+                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">Age *</label>
+                  <Input
+                    id="age"
+                    name="age"
+                    placeholder="Your age"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <Input
+                  id="email"
                   name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email *</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="Your email address" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  type="email"
+                  placeholder="Your email address"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="school" className="block text-sm font-medium text-gray-700 mb-1">School *</label>
+                <Input
+                  id="school"
                   name="school"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>School *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your school name" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Your school name"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="parentName" className="block text-sm font-medium text-gray-700 mb-1">Parent Name *</label>
+                <Input
+                  id="parentName"
                   name="parentName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Parent Name *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Parent/guardian full name" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Parent/guardian full name"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="parentEmail" className="block text-sm font-medium text-gray-700 mb-1">Parent Email *</label>
+                <Input
+                  id="parentEmail"
                   name="parentEmail"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Parent Email *</FormLabel>
-                      <FormControl>
-                        <Input type="email" placeholder="Parent/guardian email" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  type="email"
+                  placeholder="Parent/guardian email"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="parentPhone" className="block text-sm font-medium text-gray-700 mb-1">Parent Phone Number *</label>
+                <Input
+                  id="parentPhone"
                   name="parentPhone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Parent Phone Number *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Parent/guardian phone number" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Parent/guardian phone number"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="contactMethod" className="block text-sm font-medium text-gray-700 mb-1">Best Contact Method for Student & Parent (Optional)</label>
+                <Input
+                  id="contactMethod"
                   name="contactMethod"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Best Contact Method for Student & Parent (Optional)</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Preferred contact method" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Preferred contact method"
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="source" className="block text-sm font-medium text-gray-700 mb-1">Where did you hear about us? *</label>
+                <Input
+                  id="source"
                   name="source"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Where did you hear about us? *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g. School, Friend, Social Media" required {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="e.g. School, Friend, Social Media"
+                  required
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
+              <div>
+                <label htmlFor="questions" className="block text-sm font-medium text-gray-700 mb-1">Questions?</label>
+                <Textarea
+                  id="questions"
                   name="questions"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Questions?</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Any questions you might have for us" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                  placeholder="Any questions you might have for us"
+                  rows={4}
                 />
+              </div>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 py-6 text-lg h-auto"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Registration'}
-                </Button>
-              </form>
-            </Form>
+              <Button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 py-6 text-lg h-auto"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+              </Button>
+            </form>
           )}
         </div>
       </div>
