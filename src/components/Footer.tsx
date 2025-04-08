@@ -38,7 +38,7 @@ export default function Footer() {
               onMouseEnter={() => setShowConfetti(true)}
               onMouseLeave={() => setShowConfetti(false)}
             >
-              <a href="https://example.com/donate" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.zeffy.com/en-US/donation-form/donate-to-the-future-leaders-initiative" target="_blank" rel="noopener noreferrer">
                 Make a Donation
               </a>
             </Button>
