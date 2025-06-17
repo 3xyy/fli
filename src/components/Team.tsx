@@ -72,8 +72,6 @@ export default function Team() {
             {!isSubmitted ? (
               <form 
                 action={formsparkEndpoint}
-                method="POST" 
-                onSubmit={handleSubmit} 
                 className="space-y-4"
               >
                 <h4 className="text-xl font-semibold text-blue-800 mb-3">Contact Form</h4>
