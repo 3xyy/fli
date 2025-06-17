@@ -60,7 +60,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center space-x-6 ${scrolled ? 'absolute right-4' : ''}`}>
+          <div className={`hidden md:flex items-center space-x-6`}>
             <a
               href="#about"
               className={`transition duration-300 text-lg ${
