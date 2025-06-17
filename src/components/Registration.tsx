@@ -16,7 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import TurnstileInput from 'turnstile-next';
-
+import Script from "next/script";
 import React from 'react';
 type FormValues = {
   fullName: string;
@@ -215,7 +215,18 @@ export default function Registration() {
                   rows={4}
                 />
               </div>
-
+              {/* Cloudflare Turnstile script using next/script */}
+              <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                async
+                defer
+              />
+              {/* Turnstile widget */}
+              <div
+                className="cf-turnstile"
+                data-sitekey={SITE_KEY}
+                data-callback="javascriptCallback"
+              ></div>
               <Button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 py-6 text-lg h-auto"
