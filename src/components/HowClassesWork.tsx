@@ -56,6 +56,18 @@ export default function HowClassesWork() {
               </div>
             </div>
 
+            <div className="flex flex-col md:flex-row items-center mb-6">
+              <div className="bg-blue-600 text-white text-2xl font-bold rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6">
+                📅
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-blue-800 mb-2">Office Hours</h3>
+                <p className="text-gray-700">
+                  Office hours will be held after every class from 10-11 AM where students can ask questions and get help
+                </p>
+              </div>
+            </div>
+
             <div className="flex flex-col md:flex-row items-center">
               <div className="bg-blue-600 text-white text-2xl font-bold rounded-full w-12 h-12 flex items-center justify-center mb-4 md:mb-0 md:mr-6">
                 🏆
