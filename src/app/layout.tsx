@@ -4,7 +4,7 @@ import "./globals.css";
 import ClientBody from "./ClientBody";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
-
+import TurnstileContext from 'turnstile-next/vercel';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

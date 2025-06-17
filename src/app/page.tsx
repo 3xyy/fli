@@ -7,7 +7,7 @@ import FAQ from '@/components/FAQ';
 import Registration from '@/components/Registration';
 import Team from '@/components/Team';
 import Footer from '@/components/Footer';
-
+import TurnstileContext from 'turnstile-next/vercel';
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
