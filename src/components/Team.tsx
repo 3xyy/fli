@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import TurnstileInput from 'turnstile-next';
 import Image from 'next/image';
+import Script from 'next/script';
 export default function Team() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -126,7 +127,18 @@ export default function Team() {
                     required
                   />
                 </div>
-
+                {/* Cloudflare Turnstile script using next/script */}
+                <Script
+                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                  async
+                  defer
+                />
+                {/* Turnstile widget */}
+                <div
+                  className="cf-turnstile"
+                  data-sitekey={SITE_KEY}
+                  data-callback="javascriptCallback"
+                ></div>
                 <Button
                   type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-700"
