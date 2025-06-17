@@ -1,5 +1,5 @@
 'use client';
-const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_ENDPOINT;
+const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_CON_ENDPOINT;
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
