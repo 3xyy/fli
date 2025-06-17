@@ -1,4 +1,5 @@
 'use client';
+const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_ENDPOINT;
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -70,7 +71,7 @@ export default function Team() {
 
             {!isSubmitted ? (
               <form 
-                action="https://formspree.io/f/mgvapadr" 
+                action={formsparkEndpoint}
                 method="POST" 
                 onSubmit={handleSubmit} 
                 className="space-y-4"
