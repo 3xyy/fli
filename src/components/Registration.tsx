@@ -1,4 +1,5 @@
 'use client';
+const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_ENDPOINT;
 
 import { useState } from 'react';
 import {
@@ -97,7 +98,7 @@ export default function Registration() {
             </div>
           ) : (
             <form 
-              action="https://formspree.io/f/mgvapadr" 
+              action="{formsparkEndpoint}" 
               method="POST" 
               onSubmit={handleSubmit} 
               className="space-y-6"
