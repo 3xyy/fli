@@ -98,9 +98,7 @@ export default function Registration() {
             </div>
           ) : (
             <form 
-              action="{formsparkEndpoint}" 
-              method="POST" 
-              onSubmit={handleSubmit} 
+              action={formsparkEndpoint}
               className="space-y-6"
             >
               <div>
