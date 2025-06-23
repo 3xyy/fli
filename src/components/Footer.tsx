@@ -2,11 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Confetti from './Confetti';
 
 export default function Footer() {
   const [showConfetti, setShowConfetti] = useState(false);
+  const donateBtnRef = useRef<HTMLButtonElement>(null);
 
   // Function to handle smooth scrolling
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -22,7 +23,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-blue-900 text-white">
-      <Confetti isActive={showConfetti} />
+      <Confetti isActive={showConfetti} buttonRef={donateBtnRef} />
       {/* Donation Section */}
       <div id="donate" className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto bg-blue-800 rounded-xl p-10 shadow-2xl shadow-blue-900/30 transform hover:scale-[1.02] transition-all duration-300 animate-float-bounce hover:shadow-blue-900/50 hover:bg-blue-700 group">
@@ -34,6 +35,7 @@ export default function Footer() {
 
           <div className="text-center">
             <Button 
+              ref={donateBtnRef}
               className="bg-white text-blue-800 hover:bg-blue-50 px-10 py-6 text-lg h-auto rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300 hover:shadow-xl"
               onMouseEnter={() => setShowConfetti(true)}
               onMouseLeave={() => setShowConfetti(false)}
