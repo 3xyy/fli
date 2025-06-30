@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,21 +21,37 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Function to handle smooth scrolling
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  // Smooth scroll handler for navigation from any page
+  const handleNav = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = id === 'registration' ? -500 : 120; // Increased offset for registration section
-      window.scrollTo({
-        top: element.offsetTop - offset,
-        behavior: 'smooth'
-      });
+    const scrollWithOffset = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+    if (window.location.pathname !== '/') {
+      router.push('/#' + id);
+      setTimeout(() => {
+        // Try scrolling multiple times for reliability
+        let tries = 0;
+        const tryScroll = () => {
+          const el = document.getElementById(id);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else if (tries < 5) {
+            tries++;
+            setTimeout(tryScroll, 100);
+          }
+        };
+        tryScroll();
+      }, 600);
+    } else {
+      scrollWithOffset();
     }
-    // Close mobile menu if open
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    }
+    if (isMenuOpen) setIsMenuOpen(false);
   };
 
   return (
@@ -61,42 +79,42 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className={`hidden md:flex items-center space-x-6`}>
-            <a
-              href="#about"
+            <Link
+              href="/#about"
               className={`transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'about')}
+              onClick={e => handleNav(e, 'about')}
             >
               Who We Are
-            </a>
-            <a
-              href="#classes"
+            </Link>
+            <Link
+              href="/#classes"
               className={`transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'classes')}
+              onClick={e => handleNav(e, 'classes')}
             >
               Classes
-            </a>
-            <a
-              href="#faq"
+            </Link>
+            <Link
+              href="/#faq"
               className={`transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'faq')}
+              onClick={e => handleNav(e, 'faq')}
             >
               FAQ
-            </a>
+            </Link>
             <Button variant="outline" className={`text-lg py-6 ${
               scrolled ? 'border-white text-white hover:bg-white hover:text-blue-900' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
             }`}>
-              <a href="#registration" onClick={(e) => scrollToSection(e, 'registration')} className={`${scrolled ? 'text-blue-900 hover:text-blue-900' : 'text-blue-600 hover:text-white'}`}>Register Now</a>
+              <Link href="/#registration" className={`${scrolled ? 'text-blue-900 hover:text-blue-900' : 'text-blue-600 hover:text-white'}`} onClick={e => handleNav(e, 'registration')}>Register Now</Link>
             </Button>
             <Button className={`text-lg py-6 ${
               scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
             }`}>
-              <a href="#donate" onClick={(e) => scrollToSection(e, 'donate')} className="text-inherit">Donate</a>
+              <Link href="/#donate" className="text-inherit" onClick={e => handleNav(e, 'donate')}>Donate</Link>
             </Button>
           </div>
 
@@ -127,43 +145,43 @@ export default function Navbar() {
           <div className={`mt-4 md:hidden pb-4 space-y-4 ${
             scrolled ? 'text-white' : ''
           }`}>
-            <a
-              href="#about"
+            <Link
+              href="/#about"
               className={`block transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'about')}
+              onClick={e => handleNav(e, 'about')}
             >
               Who We Are
-            </a>
-            <a
-              href="#classes"
+            </Link>
+            <Link
+              href="/#classes"
               className={`block transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'classes')}
+              onClick={e => handleNav(e, 'classes')}
             >
               Classes
-            </a>
-            <a
-              href="#faq"
+            </Link>
+            <Link
+              href="/#faq"
               className={`block transition duration-300 text-lg ${
                 scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
               }`}
-              onClick={(e) => scrollToSection(e, 'faq')}
+              onClick={e => handleNav(e, 'faq')}
             >
               FAQ
-            </a>
+            </Link>
             <div className="flex flex-col space-y-2">
               <Button variant="outline" className={`w-full text-lg py-6 ${
                 scrolled ? 'border-white text-white hover:bg-white hover:text-blue-900' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
               }`}>
-                <a href="#registration" className="w-full" onClick={(e) => scrollToSection(e, 'registration')}>Register Now</a>
+                <Link href="/#registration" className="w-full" onClick={e => handleNav(e, 'registration')}>Register Now</Link>
               </Button>
               <Button className={`w-full text-lg py-6 ${
                 scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
               }`}>
-                <a href="#donate" onClick={(e) => scrollToSection(e, 'donate')}>Donate</a>
+                <Link href="/#donate" onClick={e => handleNav(e, 'donate')}>Donate</Link>
               </Button>
             </div>
           </div>

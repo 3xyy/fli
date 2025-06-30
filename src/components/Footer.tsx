@@ -4,20 +4,42 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
 import Confetti from './Confetti';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Footer() {
   const [showConfetti, setShowConfetti] = useState(false);
   const donateBtnRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
-  // Function to handle smooth scrolling
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  // Smooth scroll handler for navigation from any page
+  const handleNav = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 100, // Offset by navbar height
-        behavior: 'smooth'
-      });
+    const scrollWithOffset = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+    if (window.location.pathname !== '/') {
+      router.push('/#' + id);
+      setTimeout(() => {
+        let tries = 0;
+        const tryScroll = () => {
+          const el = document.getElementById(id);
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else if (tries < 5) {
+            tries++;
+            setTimeout(tryScroll, 100);
+          }
+        };
+        tryScroll();
+      }, 600);
+    } else {
+      scrollWithOffset();
     }
   };
 
@@ -65,21 +87,21 @@ export default function Footer() {
           </div>
 
           <div className="flex space-x-8 mb-6 md:mb-0">
-            <a href="#about" className="text-blue-200 hover:text-white transition duration-300" onClick={(e) => scrollToSection(e, 'about')}>
+            <Link href="/#about" className="text-blue-200 hover:text-white transition duration-300" onClick={e => handleNav(e, 'about')}>
               About
-            </a>
-            <a href="#classes" className="text-blue-200 hover:text-white transition duration-300" onClick={(e) => scrollToSection(e, 'classes')}>
+            </Link>
+            <Link href="/#classes" className="text-blue-200 hover:text-white transition duration-300" onClick={e => handleNav(e, 'classes')}>
               Classes
-            </a>
-            <a href="#faq" className="text-blue-200 hover:text-white transition duration-300" onClick={(e) => scrollToSection(e, 'faq')}>
+            </Link>
+            <Link href="/#faq" className="text-blue-200 hover:text-white transition duration-300" onClick={e => handleNav(e, 'faq')}>
               FAQ
-            </a>
-            <a href="#registration" className="text-blue-200 hover:text-white transition duration-300" onClick={(e) => scrollToSection(e, 'registration')}>
+            </Link>
+            <Link href="/#registration" className="text-blue-200 hover:text-white transition duration-300" onClick={e => handleNav(e, 'registration')}>
               Register
-            </a>
-            <a href="#team" className="text-blue-200 hover:text-white transition duration-300" onClick={(e) => scrollToSection(e, 'team')}>
+            </Link>
+            <Link href="/#team" className="text-blue-200 hover:text-white transition duration-300" onClick={e => handleNav(e, 'team')}>
               Contact
-            </a>
+            </Link>
           </div>
         </div>
 

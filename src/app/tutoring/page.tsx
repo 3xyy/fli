@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const SCHOOL_DISTRICTS = [
   "FUSD (Fremont)",
@@ -305,15 +307,19 @@ function StudentForm() {
 export default function TutoringPage() {
   const [tab, setTab] = useState("tutor");
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center gap-4 mb-8">
-          <Button className={tab === "tutor" ? "bg-blue-600 text-white" : "bg-white text-blue-800 border border-blue-600"} onClick={() => setTab("tutor")}>Tutor Form</Button>
-          <Button className={tab === "student" ? "bg-blue-600 text-white" : "bg-white text-blue-800 border border-blue-600"} onClick={() => setTab("student")}>Student Form</Button>
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center gap-4 mb-8">
+            <Button className={tab === "tutor" ? "bg-blue-600 text-white" : "bg-white text-blue-800 border border-blue-600"} onClick={() => setTab("tutor")}>Tutor Form</Button>
+            <Button className={tab === "student" ? "bg-blue-600 text-white" : "bg-white text-blue-800 border border-blue-600"} onClick={() => setTab("student")}>Student Form</Button>
+          </div>
+          {tab === "tutor" ? <TutorForm /> : <StudentForm />}
         </div>
-        {tab === "tutor" ? <TutorForm /> : <StudentForm />}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
