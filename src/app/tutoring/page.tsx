@@ -7,13 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { submitTutorForm, submitStudentForm, FormState } from "./actions";
-
-const initialState: FormState = {
-  success: false,
-  error: false,
-  message: "",
-};
 
 const SCHOOL_DISTRICTS = [
   "FUSD (Fremont)",
@@ -94,21 +87,6 @@ function WaiverCheckbox({ checked, onChange }: WaiverCheckboxProps) {
 }
 
 function TutorForm() {
-  const [state, formAction] = React.useActionState<FormState, FormData>(submitTutorForm, initialState);
-  const pathname = usePathname();
-  useEffect(() => {
-    const sitekey = process.env.NEXT_PUBLIC_SITE_KEY;
-    const turnstileContainers = document.querySelectorAll(".cf-turnstile");
-    turnstileContainers.forEach((turnstileContainer) => {
-      (turnstileContainer as HTMLElement).innerHTML = "";
-      if (window && window.turnstile && typeof sitekey === "string" && sitekey.length > 0) {
-        window.turnstile.render(turnstileContainer, {
-          sitekey,
-          callback: "javascriptCallback",
-        });
-      }
-    });
-  }, [pathname]);
   const [form, setForm] = useState<{
     name: string;
     email: string;
@@ -141,22 +119,21 @@ function TutorForm() {
     waiver: false
   });
   return (
-    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={formAction}>
-      {state.success && <div className="mb-4 text-green-700 bg-green-100 p-2 rounded">Success! Thanks for your response.</div>}
-      {state.error && <div className="mb-4 text-red-700 bg-red-100 p-2 rounded">{state.message}</div>}
+    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={process.env.NEXT_PUBLIC_FORMSPARK_TUTTUT_ENDPOINT} method="POST">
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Tutor Application</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Label>Tutor Name</Label>
-          <Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
+          <Input name="name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
         </div>
         <div>
           <Label>Tutor Email</Label>
-          <Input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
+          <Input name="email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} required />
         </div>
         <div>
           <Label>School District</Label>
           <select
+            name="district"
             className="w-full border rounded px-3 py-2 mt-1 text-blue-900 bg-white"
             value={form.district}
             onChange={e => setForm(f => ({ ...f, district: e.target.value }))}
@@ -167,11 +144,12 @@ function TutorForm() {
         </div>
         <div>
           <Label>School Name</Label>
-          <Input value={form.school} onChange={e => setForm(f => ({ ...f, school: e.target.value }))} required />
+          <Input name="school" value={form.school} onChange={e => setForm(f => ({ ...f, school: e.target.value }))} required />
         </div>
         <div>
           <Label>Grade this Fall</Label>
           <select
+            name="grade"
             className="w-full border rounded px-3 py-2 mt-1 text-blue-900 bg-white"
             value={form.grade}
             onChange={e => setForm(f => ({ ...f, grade: (e.target as HTMLSelectElement).value }))}
@@ -183,33 +161,37 @@ function TutorForm() {
         </div>
         <div className="md:col-span-2">
           <Label>Prior Experience (max 150 words)</Label>
-          <Textarea maxLength={1200} value={form.experience} onChange={e => setForm(f => ({ ...f, experience: e.target.value }))} required />
+          <Textarea name="experience" maxLength={1200} value={form.experience} onChange={e => setForm(f => ({ ...f, experience: e.target.value }))} required />
         </div>
         <div className="md:col-span-2">
           <Label>Why do you want to be a tutor? (max 150 words)</Label>
-          <Textarea maxLength={1200} value={form.why} onChange={e => setForm(f => ({ ...f, why: e.target.value }))} required />
+          <Textarea name="why" maxLength={1200} value={form.why} onChange={e => setForm(f => ({ ...f, why: e.target.value }))} required />
         </div>
         <div className="md:col-span-2">
           <MultiSelect options={GRADES} value={form.grades} onChange={v => setForm(f => ({ ...f, grades: v }))} label="Grades comfortable teaching (1-12)" />
+          {/* Hidden input for grades array */}
+          <input type="hidden" name="grades" value={form.grades.join(",")} />
         </div>
         <div className="md:col-span-2">
           <Label>When are you available to tutor?</Label>
-          <Input value={form.availability} onChange={e => setForm(f => ({ ...f, availability: e.target.value }))} required />
+          <Input name="availability" value={form.availability} onChange={e => setForm(f => ({ ...f, availability: e.target.value }))} required />
         </div>
         <div className="md:col-span-2">
           <MultiSelect options={SUBJECTS} value={form.subjects} onChange={v => setForm(f => ({ ...f, subjects: v }))} label="Subjects confident teaching" />
+          {/* Hidden input for subjects array */}
+          <input type="hidden" name="subjects" value={form.subjects.join(",")} />
         </div>
         <div className="md:col-span-2">
           <Label>Grades for each of these subjects</Label>
-          <Input value={form.subjectGrades} onChange={e => setForm(f => ({ ...f, subjectGrades: e.target.value }))} required />
+          <Input name="subjectGrades" value={form.subjectGrades} onChange={e => setForm(f => ({ ...f, subjectGrades: e.target.value }))} required />
         </div>
         <div>
           <Label>Parent Name</Label>
-          <Input value={form.parentName} onChange={e => setForm(f => ({ ...f, parentName: e.target.value }))} required />
+          <Input name="parentName" value={form.parentName} onChange={e => setForm(f => ({ ...f, parentName: e.target.value }))} required />
         </div>
         <div>
           <Label>Parent Email</Label>
-          <Input type="email" value={form.parentEmail} onChange={e => setForm(f => ({ ...f, parentEmail: e.target.value }))} required />
+          <Input name="parentEmail" type="email" value={form.parentEmail} onChange={e => setForm(f => ({ ...f, parentEmail: e.target.value }))} required />
         </div>
       </div>
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
@@ -229,34 +211,7 @@ function TutorForm() {
 }
 
 function StudentForm() {
-  const [state, formAction] = React.useActionState<FormState, FormData>(submitStudentForm, initialState);
-  const pathname = usePathname();
-  useEffect(() => {
-    const sitekey = process.env.NEXT_PUBLIC_SITE_KEY;
-    const turnstileContainers = document.querySelectorAll(".cf-turnstile");
-    turnstileContainers.forEach((turnstileContainer) => {
-      (turnstileContainer as HTMLElement).innerHTML = "";
-      if (window && window.turnstile && typeof sitekey === "string" && sitekey.length > 0) {
-        window.turnstile.render(turnstileContainer, {
-          sitekey,
-          callback: "javascriptCallback",
-        });
-      }
-    });
-  }, [pathname]);
-  const [form, setForm] = useState<{
-    name: string;
-    email: string;
-    district: string;
-    school: string;
-    grade: string;
-    why: string;
-    availability: string;
-    parentName: string;
-    parentEmail: string;
-    parentPhone: string;
-    waiver: boolean;
-  }>({
+  const [form, setForm] = useState({
     name: "",
     email: "",
     district: SCHOOL_DISTRICTS[0],
@@ -270,22 +225,21 @@ function StudentForm() {
     waiver: false
   });
   return (
-    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={formAction}>
-      {state.success && <div className="mb-4 text-green-700 bg-green-100 p-2 rounded">Success! Thanks for your response.</div>}
-      {state.error && <div className="mb-4 text-red-700 bg-red-100 p-2 rounded">{state.message}</div>}
+    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={process.env.NEXT_PUBLIC_FORMSPARK_TUTSTU_ENDPOINT} method="POST">
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Student Application</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Label>Student Name</Label>
-          <Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
+          <Input name="name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} required />
         </div>
         <div>
           <Label>Student Email (if applicable)</Label>
-          <Input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+          <Input name="email" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
         </div>
         <div>
           <Label>School District</Label>
           <select
+            name="district"
             className="w-full border rounded px-3 py-2 mt-1 text-blue-900 bg-white"
             value={form.district}
             onChange={e => setForm(f => ({ ...f, district: e.target.value }))}
@@ -296,11 +250,12 @@ function StudentForm() {
         </div>
         <div>
           <Label>School Name</Label>
-          <Input value={form.school} onChange={e => setForm(f => ({ ...f, school: e.target.value }))} required />
+          <Input name="school" value={form.school} onChange={e => setForm(f => ({ ...f, school: e.target.value }))} required />
         </div>
         <div>
           <Label>Grade this Fall</Label>
           <select
+            name="grade"
             className="w-full border rounded px-3 py-2 mt-1 text-blue-900 bg-white"
             value={form.grade}
             onChange={e => setForm(f => ({ ...f, grade: (e.target as HTMLSelectElement).value }))}
@@ -312,23 +267,23 @@ function StudentForm() {
         </div>
         <div className="md:col-span-2">
           <Label>Why does your student need tutoring?</Label>
-          <Input value={form.why} onChange={e => setForm(f => ({ ...f, why: e.target.value }))} required />
+          <Input name="why" value={form.why} onChange={e => setForm(f => ({ ...f, why: e.target.value }))} required />
         </div>
         <div className="md:col-span-2">
           <Label>When are you available to receive tutoring?</Label>
-          <Input value={form.availability} onChange={e => setForm(f => ({ ...f, availability: e.target.value }))} required />
+          <Input name="availability" value={form.availability} onChange={e => setForm(f => ({ ...f, availability: e.target.value }))} required />
         </div>
         <div>
           <Label>Parent Name</Label>
-          <Input value={form.parentName} onChange={e => setForm(f => ({ ...f, parentName: e.target.value }))} required />
+          <Input name="parentName" value={form.parentName} onChange={e => setForm(f => ({ ...f, parentName: e.target.value }))} required />
         </div>
         <div>
           <Label>Parent Email</Label>
-          <Input type="email" value={form.parentEmail} onChange={e => setForm(f => ({ ...f, parentEmail: e.target.value }))} required />
+          <Input name="parentEmail" type="email" value={form.parentEmail} onChange={e => setForm(f => ({ ...f, parentEmail: e.target.value }))} required />
         </div>
         <div>
           <Label>Parent Phone Number</Label>
-          <Input value={form.parentPhone} onChange={e => setForm(f => ({ ...f, parentPhone: e.target.value }))} required />
+          <Input name="parentPhone" value={form.parentPhone} onChange={e => setForm(f => ({ ...f, parentPhone: e.target.value }))} required />
         </div>
       </div>
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
