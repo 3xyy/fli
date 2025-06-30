@@ -120,6 +120,17 @@ function TutorForm() {
     parentEmail: "",
     waiver: false
   });
+  const turnstileRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (window.turnstile && turnstileRef.current) {
+      // Remove any previous widget
+      turnstileRef.current.innerHTML = '';
+      window.turnstile.render(turnstileRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_SITE_KEY || '',
+        callback: 'javascriptCallback',
+      });
+    }
+  }, []);
   return (
     <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={process.env.NEXT_PUBLIC_FORMSPARK_TUTTUT_ENDPOINT} method="POST">
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Tutor Application</h2>
@@ -199,11 +210,7 @@ function TutorForm() {
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
       <div className="mt-6">
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
-        <div
-          className="cf-turnstile"
-          data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""}
-          data-callback="javascriptCallback"
-        ></div>
+        <div ref={turnstileRef} className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} data-callback="javascriptCallback"></div>
       </div>
       <div className="text-center mt-6">
         <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl" type="submit" disabled={!form.waiver}>Submit Tutor Application</Button>
@@ -226,6 +233,17 @@ function StudentForm() {
     parentPhone: "",
     waiver: false
   });
+  const turnstileRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (window.turnstile && turnstileRef.current) {
+      // Remove any previous widget
+      turnstileRef.current.innerHTML = '';
+      window.turnstile.render(turnstileRef.current, {
+        sitekey: process.env.NEXT_PUBLIC_SITE_KEY || '',
+        callback: 'javascriptCallback',
+      });
+    }
+  }, []);
   return (
     <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={process.env.NEXT_PUBLIC_FORMSPARK_TUTSTU_ENDPOINT} method="POST">
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Student Application</h2>
@@ -291,11 +309,7 @@ function StudentForm() {
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
       <div className="mt-6">
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
-        <div
-          className="cf-turnstile"
-          data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""}
-          data-callback="javascriptCallback"
-        ></div>
+        <div ref={turnstileRef} className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} data-callback="javascriptCallback"></div>
       </div>
       <div className="text-center mt-6">
         <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl" type="submit" disabled={!form.waiver}>Submit Student Application</Button>

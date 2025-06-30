@@ -106,15 +106,25 @@ export default function Navbar() {
             >
               FAQ
             </Link>
-            <Button variant="outline" className={`text-lg py-6 ${
-              scrolled ? 'border-white text-white hover:bg-white hover:text-blue-900' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
-            }`}>
-              <Link href="/#registration" className={`${scrolled ? 'text-blue-900 hover:text-blue-900' : 'text-blue-600 hover:text-white'}`} onClick={e => handleNav(e, 'registration')}>Register Now</Link>
+            <Button
+              variant="outline"
+              className={`text-lg py-6 font-bold shadow-lg border-2 transition-colors duration-200 ${
+                scrolled ? 'border-blue-400 bg-white text-blue-900 hover:bg-blue-100 hover:border-blue-500' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white bg-white'
+              }`}
+              style={scrolled ? { backgroundColor: '#fff', color: '#1e3a8a', borderColor: '#60a5fa', boxShadow: '0 2px 12px 0 rgba(59,130,246,0.10)' } : { color: '#2563eb', borderColor: '#2563eb' }}
+              onClick={e => handleNav(e, 'registration')}
+              asChild={false}
+            >
+              Register Now
             </Button>
-            <Button className={`text-lg py-6 ${
-              scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
-            }`}>
-              <Link href="/#donate" className="text-inherit" onClick={e => handleNav(e, 'donate')}>Donate</Link>
+            <Button
+              className={`text-lg py-6 ${
+                scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
+              }`}
+              onClick={e => handleNav(e, 'donate')}
+              asChild={false}
+            >
+              Donate
             </Button>
           </div>
 
@@ -173,15 +183,15 @@ export default function Navbar() {
               FAQ
             </Link>
             <div className="flex flex-col space-y-2">
-              <Button variant="outline" className={`w-full text-lg py-6 ${
-                scrolled ? 'border-white text-white hover:bg-white hover:text-blue-900' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
-              }`}>
-                <Link href="/#registration" className="w-full" onClick={e => handleNav(e, 'registration')}>Register Now</Link>
+              <Button variant="outline" className={`w-full text-lg py-6 font-bold shadow-lg border-2 transition-colors duration-200 ${
+                scrolled ? 'border-blue-400 bg-white text-blue-900 hover:bg-blue-100 hover:border-blue-500' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white bg-white'
+              }`} style={scrolled ? { backgroundColor: '#fff', color: '#1e3a8a', borderColor: '#60a5fa', boxShadow: '0 2px 12px 0 rgba(59,130,246,0.10)' } : { color: '#2563eb', borderColor: '#2563eb' }} onClick={e => handleNav(e, 'registration')} asChild={false}>
+                Register Now
               </Button>
               <Button className={`w-full text-lg py-6 ${
                 scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}>
-                <Link href="/#donate" onClick={e => handleNav(e, 'donate')}>Donate</Link>
+              }`} onClick={e => handleNav(e, 'donate')} asChild={false}>
+                Donate
               </Button>
             </div>
           </div>
