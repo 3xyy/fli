@@ -1,10 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Script from "next/script";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { submitTutorForm, submitStudentForm, FormState } from "./actions";
+
+const initialState: FormState = {
+  success: false,
+  error: false,
+  message: "",
+};
 
 const SCHOOL_DISTRICTS = [
   "FUSD (Fremont)",
@@ -85,6 +94,21 @@ function WaiverCheckbox({ checked, onChange }: WaiverCheckboxProps) {
 }
 
 function TutorForm() {
+  const [state, formAction] = React.useActionState<FormState, FormData>(submitTutorForm, initialState);
+  const pathname = usePathname();
+  useEffect(() => {
+    const sitekey = process.env.NEXT_PUBLIC_SITE_KEY;
+    const turnstileContainers = document.querySelectorAll(".cf-turnstile");
+    turnstileContainers.forEach((turnstileContainer) => {
+      (turnstileContainer as HTMLElement).innerHTML = "";
+      if (window && (window as any).turnstile && typeof sitekey === "string" && sitekey.length > 0) {
+        (window as any).turnstile.render(turnstileContainer, {
+          sitekey,
+          callback: "javascriptCallback",
+        });
+      }
+    });
+  }, [pathname]);
   const [form, setForm] = useState<{
     name: string;
     email: string;
@@ -117,7 +141,9 @@ function TutorForm() {
     waiver: false
   });
   return (
-    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6">
+    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={formAction}>
+      {state.success && <div className="mb-4 text-green-700 bg-green-100 p-2 rounded">Success! Thanks for your response.</div>}
+      {state.error && <div className="mb-4 text-red-700 bg-red-100 p-2 rounded">{state.message}</div>}
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Tutor Application</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -187,6 +213,14 @@ function TutorForm() {
         </div>
       </div>
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
+      <div className="mt-6">
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+        <div
+          className="cf-turnstile"
+          data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""}
+          data-callback="javascriptCallback"
+        ></div>
+      </div>
       <div className="text-center mt-6">
         <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl" type="submit" disabled={!form.waiver}>Submit Tutor Application</Button>
       </div>
@@ -195,6 +229,21 @@ function TutorForm() {
 }
 
 function StudentForm() {
+  const [state, formAction] = React.useActionState<FormState, FormData>(submitStudentForm, initialState);
+  const pathname = usePathname();
+  useEffect(() => {
+    const sitekey = process.env.NEXT_PUBLIC_SITE_KEY;
+    const turnstileContainers = document.querySelectorAll(".cf-turnstile");
+    turnstileContainers.forEach((turnstileContainer) => {
+      (turnstileContainer as HTMLElement).innerHTML = "";
+      if (window && (window as any).turnstile && typeof sitekey === "string" && sitekey.length > 0) {
+        (window as any).turnstile.render(turnstileContainer, {
+          sitekey,
+          callback: "javascriptCallback",
+        });
+      }
+    });
+  }, [pathname]);
   const [form, setForm] = useState<{
     name: string;
     email: string;
@@ -221,7 +270,9 @@ function StudentForm() {
     waiver: false
   });
   return (
-    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6">
+    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={formAction}>
+      {state.success && <div className="mb-4 text-green-700 bg-green-100 p-2 rounded">Success! Thanks for your response.</div>}
+      {state.error && <div className="mb-4 text-red-700 bg-red-100 p-2 rounded">{state.message}</div>}
       <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">Student Application</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -281,6 +332,14 @@ function StudentForm() {
         </div>
       </div>
       <WaiverCheckbox checked={form.waiver} onChange={v => setForm(f => ({ ...f, waiver: v }))} />
+      <div className="mt-6">
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+        <div
+          className="cf-turnstile"
+          data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""}
+          data-callback="javascriptCallback"
+        ></div>
+      </div>
       <div className="text-center mt-6">
         <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl" type="submit" disabled={!form.waiver}>Submit Student Application</Button>
       </div>
