@@ -101,8 +101,8 @@ function TutorForm() {
     const turnstileContainers = document.querySelectorAll(".cf-turnstile");
     turnstileContainers.forEach((turnstileContainer) => {
       (turnstileContainer as HTMLElement).innerHTML = "";
-      if (window && (window as any).turnstile && typeof sitekey === "string" && sitekey.length > 0) {
-        (window as any).turnstile.render(turnstileContainer, {
+      if (window && window.turnstile && typeof sitekey === "string" && sitekey.length > 0) {
+        window.turnstile.render(turnstileContainer, {
           sitekey,
           callback: "javascriptCallback",
         });
@@ -236,8 +236,8 @@ function StudentForm() {
     const turnstileContainers = document.querySelectorAll(".cf-turnstile");
     turnstileContainers.forEach((turnstileContainer) => {
       (turnstileContainer as HTMLElement).innerHTML = "";
-      if (window && (window as any).turnstile && typeof sitekey === "string" && sitekey.length > 0) {
-        (window as any).turnstile.render(turnstileContainer, {
+      if (window && window.turnstile && typeof sitekey === "string" && sitekey.length > 0) {
+        window.turnstile.render(turnstileContainer, {
           sitekey,
           callback: "javascriptCallback",
         });
@@ -360,4 +360,12 @@ export default function TutoringPage() {
       </div>
     </div>
   );
+}
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: Element, options: { sitekey: string; callback: string }) => void;
+    };
+  }
 }
