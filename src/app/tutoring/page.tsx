@@ -12,6 +12,9 @@ import Footer from "@/components/Footer";
 
 const SCHOOL_DISTRICTS = [
   "FUSD (Fremont)",
+  "NHUSD (New Haven)",
+  "NUSD (Newark)",
+  "HUSD (Hayward)",
   "MVUSD (Milpitas)",
   "OUSD (Oakland)",
   "SJUSD (San Jose)",
