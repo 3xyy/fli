@@ -102,7 +102,7 @@ export default function PixelmindsPage() {
         <div className="container mx-auto px-4">
           <div className="bg-blue-100 border border-blue-300 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
             <h1 className="text-3xl font-bold text-blue-900 mb-4">PixelMind Python 101 Summer Sign-Ups</h1>
-            <p className="mb-2">There will be a total of 7 sessions (completely free). Each session will be weekly on Friday at 8 PM beginning on August 3rd, 2025 to September 14th.</p>
+            <p className="mb-2">There will be a total of 7 sessions (completely <span className="rainbow-move-text">free</span>). Each session will be <b>weekly</b> on <b>Friday at 8 PM</b> beginning on <b>August 3rd, 2025</b> to <b>September 14th, 2025</b>.</p>
             <p className="mb-2">Here is a link to a document containing the course outline (week-by-week): <a href="https://docs.google.com/document/d/1uvFINCp85JAi0u_085hcxiXIyN-OQYlvSXjufKcJLp4/edit?usp=sharing" className="text-blue-700 underline" target="_blank" rel="noopener noreferrer">Course Outline</a>.</p>
             <p className="mb-2">A bit about me: I am Anish Sahoo, a soon-to-be freshman (9th grader) at Mission San Jose High School. I am also a Life Scout and I am a part of Troop 110. I love computer science and things related to it so I started PixelMind as a nonprofit to help spread the power of computer science and all the opportunities that it can bring. All the classes are completely free and available to anyone!</p>
             <p>While previous experience in Python or a coding language is not required, you should be familiar with your operating system (Windows / Mac) and know how to do basic file operations (ex. copying files / moving files).</p>
@@ -111,6 +111,23 @@ export default function PixelmindsPage() {
         </div>
       </div>
       <Footer />
+      <style jsx global>{`
+  .rainbow-move-text {
+    font-weight: bold;
+    background: linear-gradient(270deg, #ff5e62, #ff9966, #f9d423, #a8ff78, #43cea2, #38f9d7, #5b86e5, #a17fe0, #f953c6, #ff5e62);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow-move-side 7s linear infinite;
+    display: inline-block;
+  }
+  @keyframes rainbow-move-side {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+`}</style>
     </>
   );
 }
