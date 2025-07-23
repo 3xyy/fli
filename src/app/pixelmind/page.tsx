@@ -10,6 +10,14 @@ import Footer from "@/components/Footer";
 
 const PIXELMINDS_FORM_ENDPOINT = "https://submit-form.com/O6ZoVpmTP";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: Element, options: { sitekey: string; callback: string }) => void;
+    };
+  }
+}
+
 function PixelmindsForm() {
   const [form, setForm] = useState({
     studentName: "",
@@ -23,9 +31,9 @@ function PixelmindsForm() {
   const turnstileRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).turnstile && turnstileRef.current) {
+    if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
       (turnstileRef.current as HTMLDivElement).innerHTML = '';
-      (window as any).turnstile.render(turnstileRef.current, {
+      window.turnstile.render(turnstileRef.current, {
         sitekey: process.env.NEXT_PUBLIC_SITE_KEY || '',
         callback: 'javascriptCallback',
       });
