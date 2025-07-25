@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Confetti from "@/components/Confetti";
 
 const PIXELMINDS_FORM_ENDPOINT = "https://submit-form.com/O6ZoVpmTP";
 
@@ -28,7 +29,9 @@ function PixelmindsForm() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const turnstileRef = useRef<HTMLDivElement>(null);
+  const submitBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
@@ -95,7 +98,17 @@ function PixelmindsForm() {
             <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
             <div ref={turnstileRef} className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} data-callback="javascriptCallback"></div>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl w-full" type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Submit Registration"}</Button>
+          <Confetti isActive={showConfetti} buttonRef={submitBtnRef} />
+          <Button
+            ref={submitBtnRef}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl w-full"
+            type="submit"
+            disabled={submitting}
+            onMouseEnter={() => setShowConfetti(true)}
+            onMouseLeave={() => setShowConfetti(false)}
+          >
+            {submitting ? "Submitting..." : "Submit Registration"}
+          </Button>
         </>
       )}
     </form>
@@ -112,7 +125,8 @@ export default function PixelmindsPage() {
             <h1 className="text-3xl font-bold text-blue-900 mb-4">PixelMind Python 101 Summer Sign-Ups</h1>
             <p className="mb-2">There will be a total of 7 sessions (completely <span className="rainbow-move-text">free</span>). Each session will be <b>weekly</b> on <b>Friday at 8 PM</b> beginning on <b>August 3rd, 2025</b> to <b>September 14th, 2025</b>.</p>
             <p className="mb-2">Here is a link to a document containing the course outline (week-by-week): <a href="https://docs.google.com/document/d/1uvFINCp85JAi0u_085hcxiXIyN-OQYlvSXjufKcJLp4/edit?usp=sharing" className="text-blue-700 underline" target="_blank" rel="noopener noreferrer">Course Outline</a>.</p>
-            <p className="mb-2">A bit about me: I am Anish Sahoo, a soon-to-be freshman (9th grader) at Mission San Jose High School. I am also a Life Scout and I am a part of Troop 110. I love computer science and things related to it so I started PixelMind as a nonprofit to help spread the power of computer science and all the opportunities that it can bring. All the classes are completely free and available to anyone!</p>
+            <p className="mb-2">I am Anish Sahoo, a rising freshman (9th grader) at Mission San Jose High School in Fremont. I have been helping students in fields such as computer science and mathematics since I was in third grade by mentoring abacus students. I am the founder of the Computer Applications Club at my Hopkins Middle School that still continues on. In this club I taught 3D design, video editing, and basics of programming and computer parts. Furthermore, I also tutored middle school students in math and I have several years of programming experience in the languages of Python, Java, C++, and HTML. Being a part of scouts, I have also learned valuable knowledge about leadership and other important skills in Troop 110. All of these classes are completely free and are available to anyone who is interested!</p>
+            <p className="mb-2">I wanted to spread the power of computer science and all the opportunities that programming brings to younger students who might be interested. For that reason, I founded PixelMind, a non-profit in association with the Future Leaders Initiative 501 (c)(3) nonprofit.</p>
             <p>While previous experience in Python or a coding language is not required, you should be familiar with your operating system (Windows / Mac) and know how to do basic file operations (ex. copying files / moving files).</p>
           </div>
           <PixelmindsForm />
