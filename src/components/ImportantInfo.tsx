@@ -5,7 +5,7 @@ export default function ImportantInfo() {
         <h2 className="text-3xl font-bold text-center mb-10 text-blue-900">Other Important Information</h2>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-blue-50 rounded-lg p-6 shadow-md">
+          <div className="bg-blue-50 rounded-lg p-6 shadow-md transition-all duration-500 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-2xl">
             <div className="flex items-center mb-4">
               <div className="bg-blue-600 rounded-full p-2 mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,7 +19,7 @@ export default function ImportantInfo() {
             </p>
           </div>
 
-          <div className="bg-blue-50 rounded-lg p-6 shadow-md">
+          <div className="bg-blue-50 rounded-lg p-6 shadow-md transition-all duration-500 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-2xl">
             <div className="flex items-center mb-4">
               <div className="bg-blue-600 rounded-full p-2 mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,7 +33,7 @@ export default function ImportantInfo() {
             </p>
           </div>
 
-          <div className="bg-blue-50 rounded-lg p-6 shadow-md">
+          <div className="bg-blue-50 rounded-lg p-6 shadow-md transition-all duration-500 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-2xl">
             <div className="flex items-center mb-4">
               <div className="bg-blue-600 rounded-full p-2 mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +47,7 @@ export default function ImportantInfo() {
             </p>
           </div>
 
-          <div className="bg-blue-50 rounded-lg p-6 shadow-md">
+          <div className="bg-blue-50 rounded-lg p-6 shadow-md transition-all duration-500 ease-in-out hover:-translate-y-3 hover:scale-105 hover:shadow-2xl">
             <div className="flex items-center mb-4">
               <div className="bg-blue-600 rounded-full p-2 mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
