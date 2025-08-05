@@ -9,7 +9,7 @@ export default function AboutUs() {
     { name: 'Saaket Bapu', role: 'Role', image: 'https://scontent-zrh1-1.xx.fbcdn.net/v/t1.15752-9/526540395_614128638418966_3768804724252777055_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_ohc=_8QynVegV_QQ7kNvwGFtdhH&_nc_oc=AdnYXUCStr8iAsFfcoq6ZV-nehtoJEUYdpzYLanPZi_FHoenA5YtCAB51Ycaq4TH3U6Lh8Z5YUDYIgy0Il2jOCMt&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-zrh1-1.xx&oh=03_Q7cD3AG4haFfW2wGzMD4gBcDAouo8U-FxbUuV8bUeUH7BEDHSg&oe=68B900CB' },
     { name: 'Nishil Sanikommu', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/527914368_650246184114602_8289797729780730054_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=jadU4w-aguIQ7kNvwF5pcjZ&_nc_oc=Adl3Q8LC8Yb0k7uJjzEWRIh94Nv3MpILwfGMrBSEm37uE5I2lwcUhvCahwpPmq_FR1c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AHyTwlg96yjWQYzA-wZqhlQmMcfRGFPhDB6PHyPrU5j6A&oe=68B8DCC7' },
     { name: 'Aadi Mann', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/521478011_25051990007735630_6320480404296317597_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=Bhb6Tk4DDDsQ7kNvwHpCDlc&_nc_oc=AdkyshOSveosHaQrDmpZNALA9F5vMFezpYbqjdsE__3Xuvq3IzxbEyxkUKdGi8Lpa28&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AH-W2e6dg8l4UfbQv-m9tiWxgwsiFo4oD9TrwpZNnDMig&oe=68B8E793' },
-    { name: 'Ojas Lastname', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/521492402_2024470017959691_1945922085330990648_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=dS0jfpp1HBkQ7kNvwFItn5n&_nc_oc=AdkCvShKnWqq6wGUIRwB3irHAGXwZ3QdCMb0_4Kk2UQAACke8bMFgaaZHHCaJV8rsXo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AGhq1Qz7SrhvNwtVdEtwqZwV8nrDpvXqGI0v2eBBU_12A&oe=68B8D978' },
+    { name: 'Ojas Singh', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/521492402_2024470017959691_1945922085330990648_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=dS0jfpp1HBkQ7kNvwFItn5n&_nc_oc=AdkCvShKnWqq6wGUIRwB3irHAGXwZ3QdCMb0_4Kk2UQAACke8bMFgaaZHHCaJV8rsXo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AGhq1Qz7SrhvNwtVdEtwqZwV8nrDpvXqGI0v2eBBU_12A&oe=68B8D978' },
   ];
 
   return (
@@ -158,7 +158,7 @@ export default function AboutUs() {
                           ? { objectPosition: 'center 50%', objectFit: 'cover', transform: 'scale(1.7)' }
                           : member.name === 'Aadi Mann'
                           ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Ojas Sajo'
+                          : member.name === 'Ojas Singh'
                           ? { objectFit: 'cover', transform: 'scale(1.7)' }
                           : member.name === 'Saaket Bapu'
                           ? { objectFit: 'cover', transform: 'scale(1.15)' }
@@ -189,7 +189,7 @@ export default function AboutUs() {
                           ? { objectPosition: 'center 50%', objectFit: 'cover', transform: 'scale(1.7)' }
                           : member.name === 'Aadi Mann'
                           ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Ojas Sajo'
+                          : member.name === 'Ojas Singh'
                           ? { objectFit: 'cover', transform: 'scale(1.7)' }
                           : member.name === 'Saaket Bapu'
                           ? { objectFit: 'cover', transform: 'scale(1.15)' }
