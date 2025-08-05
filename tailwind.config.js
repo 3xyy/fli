@@ -40,6 +40,15 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      keyframes: {
+        pulseScale: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.04)' }, // More subtle
+        },
+      },
+      animation: {
+        'pulse-scale': 'pulseScale 2.5s ease-in-out infinite', // Slower and gentler
+      },
     },
   },
   plugins: [],
