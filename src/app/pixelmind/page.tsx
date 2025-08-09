@@ -64,54 +64,106 @@ function PixelmindsForm() {
     }
   };
 
+  // CLASS FULL overlay logic
+  const isClassFull = true; // Set to true to show police tape overlay
+
   return (
-    <form className="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6" action={PIXELMINDS_FORM_ENDPOINT} method="POST" onSubmit={handleSubmit}>
-      <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">PixelMind Python 101 Sign-Up</h2>
-      {submitted ? (
-        <div className="text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <h3 className="text-2xl font-bold text-green-600 mb-4">Registration Successful!</h3>
-          <p className="text-gray-700 mb-6">Thank you for signing up for PixelMind Python 101. We will contact you soon with more details.</p>
-          <Button onClick={() => setSubmitted(false)} className="bg-blue-600 hover:bg-blue-700">Register Another Student</Button>
+    <div className="relative">
+      <form className={`bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto mt-10 mb-16 space-y-6 ${isClassFull ? 'pointer-events-none opacity-60' : ''}`} action={PIXELMINDS_FORM_ENDPOINT} method="POST" onSubmit={handleSubmit}>
+        <h2 className="text-2xl font-bold text-blue-900 mb-4 text-center">PixelMind Python 101 Sign-Up</h2>
+        {/* Police tape overlay */}
+        {isClassFull && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none">
+            <div className="w-full flex flex-col items-center gap-2">
+              <div className="w-full flex justify-center">
+                <div
+                  className="police-tape text-yellow-100 font-extrabold text-2xl px-8 py-3 rounded-full shadow-2xl mb-2 border-4 border-black drop-shadow-lg"
+                  style={{
+                    background: 'repeating-linear-gradient(135deg, #FFD600, #FFD600 24px, #222 24px, #222 48px)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
+                    textShadow: '2px 2px 8px #222, 0 0 4px #FFD600',
+                    letterSpacing: '3px',
+                    transform: 'rotate(-6deg)'
+                  }}
+                >
+                  🚨 CLASS FULL — CAPACITY REACHED 🚨
+                </div>
+              </div>
+              <div className="w-full flex justify-center">
+                <div
+                  className="police-tape text-yellow-100 font-extrabold text-2xl px-8 py-3 rounded-full shadow-2xl border-4 border-black drop-shadow-lg"
+                  style={{
+                    background: 'repeating-linear-gradient(135deg, #FFD600, #FFD600 24px, #222 24px, #222 48px)',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
+                    textShadow: '2px 2px 8px #222, 0 0 4px #FFD600',
+                    letterSpacing: '3px',
+                    transform: 'rotate(-6deg)'
+                  }}
+                >
+                  REGISTRATION CLOSED
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div style={{ opacity: 0.4, pointerEvents: 'none' }}>
+          {submitted ? (
+            <div className="text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <h3 className="text-2xl font-bold text-green-600 mb-4">Registration Successful!</h3>
+              <p className="text-gray-700 mb-6">Thank you for signing up for PixelMind Python 101. We will contact you soon with more details.</p>
+              <Button onClick={() => setSubmitted(false)} className="bg-blue-600 hover:bg-blue-700">Register Another Student</Button>
+            </div>
+          ) : (
+            <>
+              <div>
+                <Label htmlFor="studentName">What is the student's full name (first & last)? *</Label>
+                <Input id="studentName" name="studentName" value={form.studentName} onChange={handleChange} required placeholder="Full Name" />
+              </div>
+              <div>
+                <Label htmlFor="personalEmail">Personal email? (leave empty if you don't have one)</Label>
+                <Input id="personalEmail" name="personalEmail" value={form.personalEmail} onChange={handleChange} placeholder="Personal Email (optional)" type="email" />
+              </div>
+              <div>
+                <Label htmlFor="parentName">Parent's Name? *</Label>
+                <Input id="parentName" name="parentName" value={form.parentName} onChange={handleChange} required placeholder="Parent's Name" />
+              </div>
+              <div>
+                <Label htmlFor="parentEmail">Parent's email? *</Label>
+                <Input id="parentEmail" name="parentEmail" value={form.parentEmail} onChange={handleChange} required placeholder="Parent's Email" type="email" />
+              </div>
+              <div className="mt-6">
+                <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+                <div ref={turnstileRef} className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} data-callback="javascriptCallback"></div>
+              </div>
+              <Confetti isActive={showConfetti} buttonRef={submitBtnRef} />
+              <Button
+                ref={submitBtnRef}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl w-full"
+                type="submit"
+                disabled={submitting}
+                onMouseEnter={() => setShowConfetti(true)}
+                onMouseLeave={() => setShowConfetti(false)}
+                // action={PIXELMINDS_FORM_ENDPOINT} // commented out as requested
+              >
+                {submitting ? "Submitting..." : "Submit Registration"}
+              </Button>
+            </>
+          )}
         </div>
-      ) : (
-        <>
-          <div>
-            <Label htmlFor="studentName">What is the student's full name (first & last)? *</Label>
-            <Input id="studentName" name="studentName" value={form.studentName} onChange={handleChange} required placeholder="Full Name" />
-          </div>
-          <div>
-            <Label htmlFor="personalEmail">Personal email? (leave empty if you don't have one)</Label>
-            <Input id="personalEmail" name="personalEmail" value={form.personalEmail} onChange={handleChange} placeholder="Personal Email (optional)" type="email" />
-          </div>
-          <div>
-            <Label htmlFor="parentName">Parent's Name? *</Label>
-            <Input id="parentName" name="parentName" value={form.parentName} onChange={handleChange} required placeholder="Parent's Name" />
-          </div>
-          <div>
-            <Label htmlFor="parentEmail">Parent's email? *</Label>
-            <Input id="parentEmail" name="parentEmail" value={form.parentEmail} onChange={handleChange} required placeholder="Parent's Email" type="email" />
-          </div>
-          <div className="mt-6">
-            <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
-            <div ref={turnstileRef} className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} data-callback="javascriptCallback"></div>
-          </div>
-          <Confetti isActive={showConfetti} buttonRef={submitBtnRef} />
-          <Button
-            ref={submitBtnRef}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-xl w-full"
-            type="submit"
-            disabled={submitting}
-            onMouseEnter={() => setShowConfetti(true)}
-            onMouseLeave={() => setShowConfetti(false)}
-          >
-            {submitting ? "Submitting..." : "Submit Registration"}
-          </Button>
-        </>
-      )}
-    </form>
+      </form>
+      <style jsx>{`
+        .police-tape {
+          border: 4px solid #222;
+          letter-spacing: 2px;
+          text-shadow: 1px 1px 2px #fff, 0 0 2px #222;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+          transform: rotate(-6deg);
+        }
+      `}</style>
+    </div>
   );
 }
 
