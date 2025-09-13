@@ -62,7 +62,7 @@ export default function Hero() {
         </div>
         <div className="mt-16 p-4 bg-blue-100 rounded-lg inline-block">
           <p className="text-blue-800 font-medium">
-            Classes start September 6th end December 20th | Every Saturday 9-10 AM
+            Classes start October 11th end January 31st | Every Saturday 9-10 AM
           </p>
         </div>
         <div className="mt-8 flex justify-center gap-8">

@@ -81,7 +81,7 @@ export default function Registration() {
         <div id="registration">
           <h2 className="text-3xl font-bold text-center mb-6 text-blue-900">Registration Form</h2>
           <p className="text-center text-gray-700 mb-10 max-w-3xl mx-auto">
-            Registration for the FLI Basics of Business 1 course. Classes will take place every Saturday at 9-10 am from 9/6 to 12/20.
+            Registration for the FLI Basics of Business 1 course. Classes will take place every Saturday at 9-10 am from 10/11/2025 to 1/31/2026.
           </p>
           <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
             {isSubmitted ? (
