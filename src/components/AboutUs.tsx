@@ -3,13 +3,13 @@
 export default function AboutUs() {
   // Team member data for easy editing
   const teamMembers = [
-    { name: 'Yuvraj Dar', role: 'Vice President', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/524660181_1360358439426792_2071980516771902102_n.png?_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=WarSGanukK8Q7kNvwETRM5I&_nc_oc=Adk2nf6Eiz5RTSDAks7n97X5oKy5Bz1XRtssmKYIASCKaLfjjdUPr68vnyiqKUkm_o0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AEyS4gTkkwm10SqXAdFW6xZrfRmSStSGi0cSPHEZV9YeA&oe=68B900E2' },
-    { name: 'Joshua Selvaraj', role: 'President', image: 'https://scontent-sjc3-1.xx.fbcdn.net/v/t1.15752-9/524289768_2389115964815851_4318293662157625733_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=0024fc&_nc_ohc=nQi8u99Ac8YQ7kNvwHSeUNb&_nc_oc=AdkOMh3ZdC8iXhL2AxQM3NBWX443_whCnRZtKEjv6M3a7XRhr6RsRKdbj0RZr3QTAbc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc3-1.xx&oh=03_Q7cD3AEtKtwlUrukITD5GkS6e-6aMS3vEmWICbVEPubMv5VBsw&oe=68B8DF09' },
-    { name: 'Karthik Pasupuleti', role: 'Vice President', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/525215507_777092444709119_5915893654475945003_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=MI_2Jymx55wQ7kNvwFYlmMu&_nc_oc=Adk8KGXrvV543Dk-tTfTZ9RfWl2zG4chqgEvaduLuw_35GmRhBim6cAPtmaisP-qTtk&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AEZC5RDl7GpqQpH0c_6Phn00tKevN89ZN_On1G3kpdsXA&oe=68B8F7CE' },
-    { name: 'Saaket Bapu', role: 'Role', image: 'https://scontent-zrh1-1.xx.fbcdn.net/v/t1.15752-9/526540395_614128638418966_3768804724252777055_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_ohc=_8QynVegV_QQ7kNvwGFtdhH&_nc_oc=AdnYXUCStr8iAsFfcoq6ZV-nehtoJEUYdpzYLanPZi_FHoenA5YtCAB51Ycaq4TH3U6Lh8Z5YUDYIgy0Il2jOCMt&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-zrh1-1.xx&oh=03_Q7cD3AG4haFfW2wGzMD4gBcDAouo8U-FxbUuV8bUeUH7BEDHSg&oe=68B900CB' },
-    { name: 'Nishil Sanikommu', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/527914368_650246184114602_8289797729780730054_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=jadU4w-aguIQ7kNvwF5pcjZ&_nc_oc=Adl3Q8LC8Yb0k7uJjzEWRIh94Nv3MpILwfGMrBSEm37uE5I2lwcUhvCahwpPmq_FR1c&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AHyTwlg96yjWQYzA-wZqhlQmMcfRGFPhDB6PHyPrU5j6A&oe=68B8DCC7' },
-    { name: 'Aadi Mann', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/521478011_25051990007735630_6320480404296317597_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=Bhb6Tk4DDDsQ7kNvwHpCDlc&_nc_oc=AdkyshOSveosHaQrDmpZNALA9F5vMFezpYbqjdsE__3Xuvq3IzxbEyxkUKdGi8Lpa28&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AH-W2e6dg8l4UfbQv-m9tiWxgwsiFo4oD9TrwpZNnDMig&oe=68B8E793' },
-    { name: 'Ojas Singh', role: 'Role', image: 'https://scontent-sjc6-1.xx.fbcdn.net/v/t1.15752-9/521492402_2024470017959691_1945922085330990648_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0024fc&_nc_ohc=dS0jfpp1HBkQ7kNvwFItn5n&_nc_oc=AdkCvShKnWqq6wGUIRwB3irHAGXwZ3QdCMb0_4Kk2UQAACke8bMFgaaZHHCaJV8rsXo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sjc6-1.xx&oh=03_Q7cD3AGhq1Qz7SrhvNwtVdEtwqZwV8nrDpvXqGI0v2eBBU_12A&oe=68B8D978' },
+    { name: 'Yuvraj Dar', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/1.PNG' },
+    { name: 'Joshua Selvaraj', role: 'President', image: 'https://futureleadersinitiative.sirv.com/fli/2.JPG' },
+    { name: 'Karthik Pasupuleti', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/3.JPG' },
+    { name: 'Saaket Bapu', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/4.JPG' },
+    { name: 'Nishil Sanikommu', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/5.JPG' },
+    { name: 'Aadi Mann', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/6.JPG' },
+    { name: 'Ojas Singh', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/7.JPG' },
   ];
 
   return (
