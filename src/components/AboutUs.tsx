@@ -6,10 +6,10 @@ export default function AboutUs() {
     { name: 'Yuvraj Dar', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/1.PNG' },
     { name: 'Joshua Selvaraj', role: 'President', image: 'https://futureleadersinitiative.sirv.com/fli/2.JPG' },
     { name: 'Karthik Pasupuleti', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/3.JPG' },
-    { name: 'Saaket Bapu', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/4.JPG' },
-    { name: 'Nishil Sanikommu', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/5.JPG' },
-    { name: 'Aadi Mann', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/6.JPG' },
-    { name: 'Ojas Singh', role: 'Role', image: 'https://futureleadersinitiative.sirv.com/fli/7.JPG' },
+    { name: 'Saaket Bapu', role: 'Secretary', image: 'https://futureleadersinitiative.sirv.com/fli/4.JPG' },
+    { name: 'Nishil Sanikommu', role: 'Research', image: 'https://futureleadersinitiative.sirv.com/fli/5.JPG' },
+    { name: 'Aadi Mann', role: 'Marketing', image: 'https://futureleadersinitiative.sirv.com/fli/6.JPG' },
+    { name: 'Ojas Singh', role: 'Research', image: 'https://futureleadersinitiative.sirv.com/fli/7.JPG' },
   ];
 
   return (
