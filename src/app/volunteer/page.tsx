@@ -39,7 +39,7 @@ function VolunteerForm() {
 
   useEffect(() => {
     // Define global callback for Turnstile
-    (window as any).onTurnstileSuccess = () => setTurnstileChecked(true);
+    (window as Window & { onTurnstileSuccess?: () => void }).onTurnstileSuccess = () => setTurnstileChecked(true);
     if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
       (turnstileRef.current as HTMLDivElement).innerHTML = '';
       window.turnstile.render(turnstileRef.current, {
