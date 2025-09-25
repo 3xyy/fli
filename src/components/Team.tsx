@@ -1,7 +1,7 @@
 'use client';
 const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_CON_ENDPOINT;
 const SITE_KEY = process.env.NEXT_PUBLIC_SITE_KEY;
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,6 +11,39 @@ import Script from 'next/script';
 export default function Team() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const renderTurnstile = () => {
+      if (!isMounted) return;
+      if (turnstileRef.current) {
+        turnstileRef.current.innerHTML = '';
+      }
+      if (window.turnstile && turnstileRef.current) {
+        window.turnstile.render(turnstileRef.current, {
+          sitekey: SITE_KEY || '',
+          callback: 'javascriptCallback',
+        });
+      }
+    };
+    if (typeof window !== 'undefined') {
+      let tries = 0;
+      const poll = () => {
+        if (window.turnstile) {
+          renderTurnstile();
+        } else if (tries < 50) {
+          tries++;
+          setTimeout(poll, 100);
+        }
+      };
+      poll();
+    }
+    return () => {
+      isMounted = false;
+      if (turnstileRef.current) turnstileRef.current.innerHTML = '';
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -127,17 +160,10 @@ export default function Team() {
                     required
                   />
                 </div>
-                {/* Cloudflare Turnstile script using next/script */}
-                <Script
-                  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                  async
-                  defer
-                />
                 {/* Turnstile widget */}
                 <div
+                  ref={turnstileRef}
                   className="cf-turnstile"
-                  data-sitekey={SITE_KEY}
-                  data-callback="javascriptCallback"
                 ></div>
                 <Button
                   type="submit"

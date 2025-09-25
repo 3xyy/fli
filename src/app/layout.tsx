@@ -33,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
       </head>
       <ClientBody>
         {children}
