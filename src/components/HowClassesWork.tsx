@@ -27,7 +27,7 @@ export default function HowClassesWork() {
               <div>
                 <h3 className="text-xl font-semibold text-blue-800 mb-2">Class Schedule</h3>
                 <p className="text-gray-700">
-                  1 hour class every Saturday from 9-10 AM, starting 10/11/2025 and ending 1/31/2026
+                  1 hour class every Saturday from 9-10 AM, starting 11/15/2025 and ending 2/28/2026
                 </p>
               </div>
             </div>
