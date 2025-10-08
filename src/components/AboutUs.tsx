@@ -3,13 +3,20 @@
 export default function AboutUs() {
   // Team member data for easy editing
   const teamMembers = [
-    { name: 'Yuvraj Dar', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/1.PNG' },
-    { name: 'Joshua Selvaraj', role: 'President', image: 'https://futureleadersinitiative.sirv.com/fli/2.JPG' },
-    { name: 'Karthik Pasupuleti', role: 'Vice President', image: 'https://futureleadersinitiative.sirv.com/fli/3.JPG' },
-    { name: 'Saaket Bapu', role: 'Secretary', image: 'https://futureleadersinitiative.sirv.com/fli/4.JPG' },
-    { name: 'Nishil Sanikommu', role: 'Research', image: 'https://futureleadersinitiative.sirv.com/fli/5.JPG' },
-    { name: 'Aadi Mann', role: 'Marketing', image: 'https://futureleadersinitiative.sirv.com/fli/6.JPG' },
-    { name: 'Ojas Singh', role: 'Research', image: 'https://futureleadersinitiative.sirv.com/fli/7.JPG' },
+    { name: 'Yuvraj Dar', role: 'Vice President' },
+    { name: 'Joshua Selvaraj', role: 'President' },
+    { name: 'Karthik Pasupuleti', role: 'Vice President' },
+    { name: 'Riley Wan', role: 'Marketing Secretary' },
+    { name: 'Saaket Bapu', role: 'Research Secretary' },
+    { name: 'Ojas Singh', role: 'Head Of Research' },
+    { name: 'Aadiraj Mann', role: 'Head Of Research' },
+    { name: 'Nishil Sanikommu', role: 'Research' },
+    { name: 'Vihaan Sanghvi', role: 'Research' },
+    { name: 'Arjan Sidhu', role: 'Recruitment & Marketing' },
+    { name: 'Jordan Timoteo', role: 'Research' },
+    { name: 'Ocean Joshi', role: 'In-Person Marketing' },
+    { name: 'Amvi Maheshwari', role: 'In-Person Marketing' },
+    { name: 'Emily Yu', role: 'In-Person Marketing' },
   ];
 
   return (
@@ -142,63 +149,47 @@ export default function AboutUs() {
 
           <h2 className="text-2xl font-bold text-center mb-12 mt-8 text-blue-900">Meet Our Team</h2>
           <div className="flex justify-center">
-            <div className="grid grid-cols-3 gap-x-20 mb-4 w-full">
+            <div className="grid grid-cols-3 gap-x-20 mb-8 w-full">
               {/* Top row: 3 members */}
-              {teamMembers.slice(0,3).map((member, i) => (
-                <div key={member.name} className="flex flex-col items-center bg-white rounded-lg shadow-lg p-10 min-h-[220px] min-w-[200px] w-full transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
-                  <div className="w-44 h-44 rounded-full overflow-hidden mb-4 border-4 border-blue-200 flex items-center justify-center bg-gray-100">
-                    <img
-                      src={member.image || "/public/logo.png"}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      style={
-                        member.name === 'Joshua Selvaraj'
-                          ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Nishil Sanikommu'
-                          ? { objectPosition: 'center 50%', objectFit: 'cover', transform: 'scale(1.7)' }
-                          : member.name === 'Aadi Mann'
-                          ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Ojas Singh'
-                          ? { objectFit: 'cover', transform: 'scale(1.7)' }
-                          : member.name === 'Saaket Bapu'
-                          ? { objectFit: 'cover', transform: 'scale(1.15)' }
-                          : {}
-                      }
-                    />
-                  </div>
-                  <h4 className="text-2xl font-bold text-blue-800 mb-2 text-center break-words whitespace-nowrap w-full flex justify-center">{member.name}</h4>
-                  <span className="text-base font-semibold text-blue-600 mb-2">{member.role}</span>
+              {teamMembers.slice(0,3).map((member) => (
+                <div key={member.name} className="flex flex-col items-center bg-white rounded-lg shadow-lg p-10 min-h-[220px] min-w-[200px] w-full transition-transform duration-200 hover:scale-105 hover:shadow-2xl relative">
+                  <h4 className="text-4xl font-extrabold text-blue-800 mb-2 text-center break-words whitespace-nowrap w-full flex justify-center">{member.name}</h4>
+                  <span className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-blue-600 text-center w-full">{member.role}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex justify-center mt-6 bg-blue-50"> {/* Added bg-blue-50 to remove white gap below team section */}
-            <div className="grid grid-cols-4 gap-x-16 w-full">
-              {/* Bottom row: 4 members */}
-              {teamMembers.slice(3).map((member, i) => (
-                <div key={member.name} className="flex flex-col items-center bg-white rounded-lg shadow-lg p-16 min-h-[320px] min-w-[220px] w-full transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
-                  <div className="w-44 h-44 rounded-full overflow-hidden mb-6 border-4 border-blue-200 flex items-center justify-center bg-gray-100">
-                    <img
-                      src={member.image || "/public/logo.png"}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                      style={
-                        member.name === 'Joshua Selvaraj'
-                          ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Nishil Sanikommu'
-                          ? { objectPosition: 'center 50%', objectFit: 'cover', transform: 'scale(1.7)' }
-                          : member.name === 'Aadi Mann'
-                          ? { objectPosition: 'center top', objectFit: 'cover', transform: 'scale(1.35)' }
-                          : member.name === 'Ojas Singh'
-                          ? { objectFit: 'cover', transform: 'scale(1.7)' }
-                          : member.name === 'Saaket Bapu'
-                          ? { objectFit: 'cover', transform: 'scale(1.15)' }
-                          : {}
-                      }
-                    />
-                  </div>
-                  <h4 className="text-2xl font-bold text-blue-800 mb-2 text-center break-words whitespace-nowrap w-full flex justify-center">{member.name}</h4>
-                  <span className="text-base font-semibold text-blue-600 mb-2">{member.role}</span>
+          <div className="flex justify-center mt-6 bg-blue-50">
+            <div className="grid grid-cols-5 gap-x-8 gap-y-14 w-full">
+              {/* Second row: 5 members, including Nishil Sanikommu at the end */}
+              {[
+                teamMembers[3],
+                teamMembers[4],
+                teamMembers[5],
+                teamMembers[6],
+                teamMembers[7] //  
+              ].map((member) => (
+                <div key={member.name} className="flex flex-col items-center bg-white rounded-lg shadow-lg p-10 min-h-[200px] min-w-[160px] w-full transition-transform duration-200 hover:scale-105 hover:shadow-2xl relative">
+                  <h4 className="text-3xl font-extrabold text-blue-800 mb-2 text-center break-words whitespace-nowrap w-full flex justify-center">{member.name}</h4>
+                  <span className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl font-bold text-blue-600 text-center w-full">{member.role}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-center mt-16 bg-blue-50">
+            <div className="grid grid-cols-6 gap-x-8 gap-y-14 w-full">
+              {/* Third row: 6 members, resized cards to fit 6 */}
+              {[
+                teamMembers[8], // Vihaan Sanghvi
+                teamMembers[9], // Arjan Sidhu
+                teamMembers[10], // Jordan Psalms Timoteo
+                teamMembers[11], // Ocean Joshi
+                teamMembers[12], // Amvi Maheshwari
+                teamMembers[13]  // Emily Yu
+              ].map((member) => (
+                <div key={member.name} className="flex flex-col items-center bg-white rounded-lg shadow-lg p-8 min-h-[170px] min-w-[130px] w-full transition-transform duration-200 hover:scale-105 hover:shadow-2xl relative">
+                  <h4 className="text-2xl font-extrabold text-blue-800 mb-2 text-center break-words whitespace-nowrap w-full flex justify-center">{member.name}</h4>
+                  <span className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-lg font-bold text-blue-600 text-center w-full">{member.role}</span>
                 </div>
               ))}
             </div>
