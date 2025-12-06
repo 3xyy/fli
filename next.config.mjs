@@ -2,14 +2,14 @@
 const nextConfig = {
   output: 'export',
   distDir: 'out',
+  // Set turbopack.root to silence workspace root warning
+  turbopack: {
+    // Use process.cwd() instead of __dirname for ES module compatibility
+    root: process.cwd(),
+  },
   images: {
     unoptimized: true,
-    domains: [
-      "source.unsplash.com",
-      "images.unsplash.com",
-      "ext.same-assets.com",
-      "ugc.same-assets.com",
-    ],
+    // Removed deprecated 'domains' array as 'remotePatterns' is now preferred
     remotePatterns: [
       {
         protocol: "https",
