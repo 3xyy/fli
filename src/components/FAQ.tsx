@@ -47,54 +47,56 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-16 bg-blue-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10 text-blue-900">Frequently Asked Questions</h2>
-
+    <section id="faq" className="py-20 md:py-24 bg-transparent">
+      <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <Card key={index} className="mb-4 border-none shadow-md">
-                <div
-                  className="p-4 cursor-pointer flex justify-between items-center"
-                  onClick={() => toggleFAQ(index)}
-                >
-                  <h3 className="text-xl font-semibold text-blue-800">{faq.question}</h3>
-                  <div className="text-blue-600">
-                    {isOpen ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                      </svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    )}
-                  </div>
-                </div>
-                <div
-                  style={{
-                    maxHeight: isOpen ? '500px' : '0px',
-                    opacity: isOpen ? 1 : 0,
-                    transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
-                    overflow: 'hidden',
-                    transition: 'max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.4,0,0.2,1)'
-                  }}
-                >
-                  <CardContent className="pt-0 pb-4 text-gray-700">
-                    {faq.answer}
-                  </CardContent>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Frequently Asked Questions</h2>
 
-        <div className="mt-10 text-center">
-          <p className="text-gray-700">
-            Still have questions? Feel free to <a href="#team" className="text-blue-600 hover:underline" onClick={(e) => scrollToSection(e, 'team')}>contact us</a>.
-          </p>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <Card key={index} className="mb-4 glass-card rounded-xl">
+                  <div
+                    className="p-6 cursor-pointer flex justify-between items-center hover:bg-gray-50 transition-colors"
+                    onClick={() => toggleFAQ(index)}
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
+                    <div className="text-gray-600 flex-shrink-0">
+                      {isOpen ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      maxHeight: isOpen ? '500px' : '0px',
+                      opacity: isOpen ? 1 : 0,
+                      transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
+                      overflow: 'hidden',
+                      transition: 'max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.4,0,0.2,1)'
+                    }}
+                  >
+                    <CardContent className="pt-0 pb-6 px-6 text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </CardContent>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-gray-600">
+              Still have questions? Feel free to <a href="#team" className="text-gray-900 font-medium hover:underline" onClick={(e) => scrollToSection(e, 'team')}>contact us</a>.
+            </p>
+          </div>
         </div>
       </div>
     </section>

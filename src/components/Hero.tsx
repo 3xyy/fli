@@ -18,63 +18,67 @@ export default function Hero() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-50 to-white">
-      <div className="container mx-auto px-4 text-center">
-        <div className="mb-8 relative">
-          <div className="w-48 h-48 mx-auto relative hover:scale-105 transition-transform duration-300 cursor-pointer">
-            <Image
-              src="/logo.png"
-              alt="Future Leaders Initiative Logo"
-              width={192}
-              height={192}
-              className="animate-float"
-            />
+    <section className="py-24 md:py-32 bg-transparent">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-12">
+            <div className="w-32 h-32 mx-auto relative mb-8">
+              <Image
+                src="/logo.png"
+                alt="Future Leaders Initiative Logo"
+                width={128}
+                height={128}
+                className="mx-auto"
+              />
+            </div>
           </div>
-        </div>
-        <h1 className="text-5xl font-bold text-blue-900 mb-6">Future Leaders Initiative</h1>
-        <p className="text-xl text-gray-700 mb-10 max-w-3xl mx-auto">
-          Empowering the next generation with practical business education and entrepreneurial skills
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <a 
-            href="#registration" 
-            onClick={(e) => scrollToSection(e, 'registration')}
-            className="w-full sm:w-auto"
-          >
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg h-auto w-full"
-            >
-              Register Now
-            </Button>
-          </a>
-          <a 
-            href="#donate" 
-            onClick={(e) => scrollToSection(e, 'donate')}
-            className="w-full sm:w-auto"
-          >
-            <Button
-              variant="outline"
-              className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-6 text-lg h-auto w-full"
-            >
-              Donate
-            </Button>
-          </a>
-        </div>
-        <div className="mt-16 p-4 bg-blue-100 rounded-lg inline-block">
-          <p className="text-blue-800 font-medium text-lg">
-            Classes start January 24th end May 9th | Every Saturday 9-10 AM
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            Future Leaders Initiative
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Empowering the next generation with practical business education and entrepreneurial skills
           </p>
-        </div>
-        <div className="mt-8 flex justify-center gap-8">
-          <a href="https://www.instagram.com/fl_initiative" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Instagram">
-            <Image src="/instagram.png" alt="Instagram" width={40} height={40} />
-          </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Facebook">
-            <Image src="/facebook.png" alt="Facebook" width={40} height={40} />
-          </a>
-          <a href="https://nextdoor.com" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform" title="Nextdoor">
-            <Image src="/nextdoor.png" alt="Nextdoor" width={40} height={40} />
-          </a>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
+            <a 
+              href="#registration" 
+              onClick={(e) => scrollToSection(e, 'registration')}
+              className="w-full sm:w-auto"
+            >
+              <Button
+                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
+              >
+                Register Now
+              </Button>
+            </a>
+            <a 
+              href="#donate" 
+              onClick={(e) => scrollToSection(e, 'donate')}
+              className="w-full sm:w-auto"
+            >
+              <Button
+                variant="outline"
+                className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
+              >
+                Donate
+              </Button>
+            </a>
+          </div>
+          <div className="mt-16 p-6 glass-card rounded-xl inline-block">
+            <p className="text-gray-900 font-medium text-lg">
+              Classes start January 24th end May 9th | Every Saturday 9-10 AM
+            </p>
+          </div>
+          <div className="mt-12 flex justify-center gap-6">
+            <a href="https://www.instagram.com/fl_initiative" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity" title="Instagram">
+              <Image src="/instagram.png" alt="Instagram" width={32} height={32} />
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity" title="Facebook">
+              <Image src="/facebook.png" alt="Facebook" width={32} height={32} />
+            </a>
+            <a href="https://nextdoor.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity" title="Nextdoor">
+              <Image src="/nextdoor.png" alt="Nextdoor" width={32} height={32} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
