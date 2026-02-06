@@ -54,6 +54,13 @@ export default function Navbar() {
     if (isMenuOpen) setIsMenuOpen(false);
   };
 
+  // Smooth scroll to top handler
+  const handleScrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isMenuOpen) setIsMenuOpen(false);
+  };
+
   return (
     <nav className={`sticky top-4 z-50 transition-all duration-500 ${
       scrolled 
@@ -63,7 +70,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <Link href="/" className="flex items-center space-x-3 group">
+            <Link href="/" className="flex items-center space-x-3 group" onClick={handleScrollToTop}>
               <Image
                 src="/logo.png"
                 alt="FLI Logo"
@@ -71,7 +78,7 @@ export default function Navbar() {
                 height={40}
                 className="transition-transform group-hover:scale-105"
               />
-              <span className="text-xl font-semibold text-gray-900 transition-colors">
+              <span className="text-xl font-semibold text-white transition-colors">
                 Future Leaders Initiative
               </span>
             </Link>
@@ -81,27 +88,27 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/#about"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'about')}
             >
               Who We Are
             </Link>
             <Link
               href="/#classes"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'classes')}
             >
               Classes
             </Link>
             <Link
               href="/#faq"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'faq')}
             >
               FAQ
             </Link>
             <Button
-              className="bg-gray-900 text-white hover:bg-gray-800 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
+              className="bg-white text-black hover:bg-gray-100 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
               onClick={e => handleNav(e, 'registration')}
               asChild={false}
             >
@@ -113,7 +120,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className="text-gray-700 hover:text-gray-900 transition-colors"
+              className="text-gray-300 hover:text-white transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
@@ -134,27 +141,27 @@ export default function Navbar() {
           <div className="mt-4 md:hidden pb-4 space-y-4 border-t border-white/20 pt-4">
             <Link
               href="/#about"
-              className="block text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'about')}
             >
               Who We Are
             </Link>
             <Link
               href="/#classes"
-              className="block text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'classes')}
             >
               Classes
             </Link>
             <Link
               href="/#faq"
-              className="block text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'faq')}
             >
               FAQ
             </Link>
             <Button
-              className="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
+              className="w-full bg-white text-black hover:bg-gray-100 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
               onClick={e => handleNav(e, 'registration')}
               asChild={false}
             >

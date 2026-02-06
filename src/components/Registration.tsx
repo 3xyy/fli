@@ -3,6 +3,7 @@ const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_REG_ENDPOINT;
 const SITE_KEY = process.env.NEXT_PUBLIC_SITE_KEY;
 
 import { useState, useEffect, useRef } from 'react';
+import ScrollAnimation from './ScrollAnimation';
 import {
   Form,
   FormControl,
@@ -116,11 +117,12 @@ export default function Registration() {
   };
 
   return (
-    <section className="py-20 md:py-24 bg-transparent">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section className="relative py-20 md:py-24 bg-transparent">
+      <ScrollAnimation>
+        <div className="container mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6">Follow Us on Social Media!</h3>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <h3 className="text-2xl md:text-3xl font-semibold text-white mb-6">Follow Us on Social Media!</h3>
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
             Stay updated with our latest events, success stories, and announcements by following us on Instagram!
           </p>
           <div className="flex justify-center mb-8">
@@ -133,15 +135,15 @@ export default function Registration() {
                 suppressHydrationWarning
               />
             ) : (
-              <div className="w-full max-w-[540px] min-w-[326px] h-[600px] bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500">Loading Instagram feed...</p>
+              <div className="w-full max-w-[540px] min-w-[326px] h-[600px] glass-card rounded-lg flex items-center justify-center">
+                <p className="text-gray-300">Loading Instagram feed...</p>
               </div>
             )}
           </div>
         </div>
         <div id="registration">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900">Registration Form</h2>
-          <p className="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-white">Registration Form</h2>
+          <p className="text-center text-lg text-gray-300 mb-12 max-w-3xl mx-auto">
             Registration for the FLI Basics of Business 1 course. Classes will take place every Saturday at 9-10 am from 1/24/2026 to 5/9/2026.
           </p>
           <div className="max-w-2xl mx-auto glass-card rounded-2xl p-8 md:p-12">
@@ -150,11 +152,11 @@ export default function Registration() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Registration Successful!</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-2xl font-bold text-white mb-4">Registration Successful!</h3>
+              <p className="text-gray-300 mb-6">
                 Thank you for registering for the Future Leaders Initiative course. We will contact you shortly with further details.
               </p>
-              <Button onClick={() => setIsSubmitted(false)} className="bg-gray-900 hover:bg-gray-800 text-white">
+              <Button onClick={() => setIsSubmitted(false)} className="bg-white hover:bg-gray-100 text-black">
                 Register Another Student
               </Button>
             </div>
@@ -164,7 +166,7 @@ export default function Registration() {
                 className="space-y-6"
               >
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">Full Name *</label>
+                  <label htmlFor="fullName" className="block text-sm font-medium text-white mb-2">Full Name *</label>
                   <Input
                     id="fullName"
                     name="fullName"
@@ -175,7 +177,7 @@ export default function Registration() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="grade" className="block text-sm font-medium text-gray-900 mb-2">Grade *</label>
+                    <label htmlFor="grade" className="block text-sm font-medium text-white mb-2">Grade *</label>
                     <Input
                       id="grade"
                       name="grade"
@@ -185,7 +187,7 @@ export default function Registration() {
                   </div>
 
                   <div>
-                    <label htmlFor="age" className="block text-sm font-medium text-gray-900 mb-2">Age *</label>
+                    <label htmlFor="age" className="block text-sm font-medium text-white mb-2">Age *</label>
                     <Input
                       id="age"
                       name="age"
@@ -196,7 +198,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">Email *</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email *</label>
                   <Input
                     id="email"
                     name="email"
@@ -207,7 +209,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="school" className="block text-sm font-medium text-gray-900 mb-2">School *</label>
+                  <label htmlFor="school" className="block text-sm font-medium text-white mb-2">School *</label>
                   <Input
                     id="school"
                     name="school"
@@ -217,7 +219,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="parentName" className="block text-sm font-medium text-gray-900 mb-2">Parent Name *</label>
+                  <label htmlFor="parentName" className="block text-sm font-medium text-white mb-2">Parent Name *</label>
                   <Input
                     id="parentName"
                     name="parentName"
@@ -227,7 +229,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="parentEmail" className="block text-sm font-medium text-gray-900 mb-2">Parent Email *</label>
+                  <label htmlFor="parentEmail" className="block text-sm font-medium text-white mb-2">Parent Email *</label>
                   <Input
                     id="parentEmail"
                     name="parentEmail"
@@ -238,7 +240,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="parentPhone" className="block text-sm font-medium text-gray-900 mb-2">Parent Phone Number *</label>
+                  <label htmlFor="parentPhone" className="block text-sm font-medium text-white mb-2">Parent Phone Number *</label>
                   <Input
                     id="parentPhone"
                     name="parentPhone"
@@ -248,7 +250,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="contactMethod" className="block text-sm font-medium text-gray-900 mb-2">Best Contact Method for Student & Parent (Optional)</label>
+                  <label htmlFor="contactMethod" className="block text-sm font-medium text-white mb-2">Best Contact Method for Student & Parent (Optional)</label>
                   <Input
                     id="contactMethod"
                     name="contactMethod"
@@ -257,7 +259,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="source" className="block text-sm font-medium text-gray-900 mb-2">Where did you hear about us? *</label>
+                  <label htmlFor="source" className="block text-sm font-medium text-white mb-2">Where did you hear about us? *</label>
                   <Input
                     id="source"
                     name="source"
@@ -267,7 +269,7 @@ export default function Registration() {
                 </div>
 
                 <div>
-                  <label htmlFor="questions" className="block text-sm font-medium text-gray-900 mb-2">Questions?</label>
+                  <label htmlFor="questions" className="block text-sm font-medium text-white mb-2">Questions?</label>
                   <Textarea
                     id="questions"
                     name="questions"
@@ -282,7 +284,7 @@ export default function Registration() {
                 ></div>
                 <Button
                   type="submit"
-                  className="w-full bg-gray-900 hover:bg-gray-800 text-white py-6 text-base font-medium"
+                  className="w-full bg-white hover:bg-gray-100 text-black py-6 text-base font-medium"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Registration'}
@@ -291,7 +293,8 @@ export default function Registration() {
             )}
           </div>
         </div>
-      </div>
+        </div>
+      </ScrollAnimation>
     </section>
   );
 }

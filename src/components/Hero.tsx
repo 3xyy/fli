@@ -18,7 +18,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-transparent">
+    <section className="relative min-h-screen bg-transparent flex items-center">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
@@ -32,11 +32,11 @@ export default function Hero() {
               />
             </div>
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Future Leaders Initiative
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Empowering the next generation with practical business education and entrepreneurial skills
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Join 300+ students as we empower the next generation with practical business education and entrepreneurial skills
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
             <a 
@@ -45,7 +45,7 @@ export default function Hero() {
               className="w-full sm:w-auto"
             >
               <Button
-                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
+                className="bg-white hover:bg-gray-100 text-black px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
               >
                 Register Now
               </Button>
@@ -57,14 +57,14 @@ export default function Hero() {
             >
               <Button
                 variant="outline"
-                className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
+                className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-base font-medium rounded-md w-full sm:w-auto transition-colors"
               >
                 Donate
               </Button>
             </a>
           </div>
           <div className="mt-16 p-6 glass-card rounded-xl inline-block">
-            <p className="text-gray-900 font-medium text-lg">
+            <p className="text-white font-medium text-lg">
               Classes start January 24th end May 9th | Every Saturday 9-10 AM
             </p>
           </div>

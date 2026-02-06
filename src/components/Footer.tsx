@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
+import ScrollAnimation from './ScrollAnimation';
 import Confetti from './Confetti';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -44,13 +45,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="relative text-white">
       <Confetti isActive={showConfetti} buttonRef={donateBtnRef} />
-      {/* Donation Section */}
-      <div id="donate" className="container mx-auto px-6 lg:px-8 py-20 md:py-24">
+      <ScrollAnimation>
+        {/* Donation Section */}
+        <div id="donate" className="container mx-auto px-6 lg:px-8 py-20 md:py-24">
         <div className="max-w-4xl mx-auto glass-card rounded-2xl p-10 md:p-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-900">Support Our Mission</h2>
-          <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-white">Support Our Mission</h2>
+          <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
             We recommend a donation of $50 or more, as this is an extensive 4-month long course.
             However, any amount is greatly appreciated and helps sustain our program.
           </p>
@@ -58,7 +60,7 @@ export default function Footer() {
           <div className="text-center">
             <Button 
               ref={donateBtnRef}
-              className="bg-gray-900 text-white hover:bg-gray-800 px-10 py-4 text-base font-medium rounded-md shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="bg-white text-black hover:bg-gray-100 px-10 py-4 text-base font-medium rounded-md shadow-lg transform hover:scale-105 transition-all duration-300"
               onMouseEnter={() => setShowConfetti(true)}
               onMouseLeave={() => setShowConfetti(false)}
             >
@@ -69,21 +71,16 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </ScrollAnimation>
 
       {/* Footer Content */}
-      <div className="container mx-auto px-6 lg:px-8 py-12 border-t border-gray-800">
+      <div className="container mx-auto px-6 lg:px-8 py-12 border-t border-gray-800/50">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-3 mb-6 md:mb-0">
-            <Image
-              src="/logo.png"
-              alt="FLI Logo"
-              width={40}
-              height={40}
-              className="hover:opacity-80 transition-opacity"
-            />
-            <a href="#" className="text-xl font-semibold text-white">
-              Future Leaders Initiative
-            </a>
+          <div className="mb-6 md:mb-0">
+            {/* Mission Statement */}
+            <p className="text-gray-400 text-sm max-w-xs">
+              Empowering the next generation with practical business education and entrepreneurial skills.
+            </p>
           </div>
 
           <div className="flex space-x-8 mb-6 md:mb-0">
@@ -122,6 +119,31 @@ export default function Footer() {
             <p className="mt-2">A student-run nonprofit organization based in the Bay Area.</p>
           </div>
         </div>
+      </div>
+
+      {/* Large Logo and Name at Bottom */}
+      <div className="border-t border-gray-800/50 pt-16 pb-20">
+        <ScrollAnimation>
+          <div 
+            className="flex flex-col items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            <div className="mb-6">
+              <Image
+                src="/logo.png"
+                alt="Future Leaders Initiative Logo"
+                width={120}
+                height={120}
+                className="mx-auto"
+              />
+            </div>
+            <h2 className="text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tight">
+              Future Leaders Initiative
+            </h2>
+          </div>
+        </ScrollAnimation>
       </div>
     </footer>
   );

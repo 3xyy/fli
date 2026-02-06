@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import ScrollAnimation from './ScrollAnimation';
 
 type FAQItem = {
   question: string;
@@ -47,58 +47,64 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 md:py-24 bg-transparent">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section id="faq" className="relative py-20 md:py-24 bg-transparent">
+      <ScrollAnimation>
+        <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Frequently Asked Questions</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">Frequently Asked Questions</h2>
 
-          <div className="space-y-4">
+          <div>
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <Card key={index} className="mb-4 glass-card rounded-xl">
+                <div key={index}>
                   <div
-                    className="p-6 cursor-pointer flex justify-between items-center hover:bg-gray-50 transition-colors"
+                    className="py-4 cursor-pointer flex justify-between items-center transition-all"
                     onClick={() => toggleFAQ(index)}
                   >
-                    <h3 className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</h3>
-                    <div className="text-gray-600 flex-shrink-0">
-                      {isOpen ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                        </svg>
-                      ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      )}
+                    <h3 className="text-lg font-medium text-white pr-4 hover:scale-[1.02] transition-transform">{faq.question}</h3>
+                    <div className="text-gray-300 flex-shrink-0">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        className="h-5 w-5 transition-transform duration-400 ease-in-out" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                        style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </div>
                   </div>
                   <div
                     style={{
                       maxHeight: isOpen ? '500px' : '0px',
                       opacity: isOpen ? 1 : 0,
-                      transform: isOpen ? 'translateY(0)' : 'translateY(-10px)',
                       overflow: 'hidden',
-                      transition: 'max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease, transform 0.5s cubic-bezier(0.4,0,0.2,1)'
+                      transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
                     }}
+                    className="pl-0"
                   >
-                    <CardContent className="pt-0 pb-6 px-6 text-gray-600 leading-relaxed">
+                    <p className="pb-4 text-gray-300 leading-relaxed">
                       {faq.answer}
-                    </CardContent>
+                    </p>
                   </div>
-                </Card>
+                  {index < faqs.length - 1 && (
+                    <div className="border-t border-gray-700/50 my-2"></div>
+                  )}
+                </div>
               );
             })}
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-600">
-              Still have questions? Feel free to <a href="#team" className="text-gray-900 font-medium hover:underline" onClick={(e) => scrollToSection(e, 'team')}>contact us</a>.
+            <p className="text-gray-300">
+              Still have questions? Feel free to <a href="#team" className="text-white font-medium hover:underline" onClick={(e) => scrollToSection(e, 'team')}>contact us</a>.
             </p>
           </div>
         </div>
-      </div>
+        </div>
+      </ScrollAnimation>
     </section>
   );
 }
