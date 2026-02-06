@@ -2,6 +2,7 @@
 const formsparkEndpoint = process.env.NEXT_PUBLIC_FORMSPARK_CON_ENDPOINT;
 const SITE_KEY = process.env.NEXT_PUBLIC_SITE_KEY;
 import { useState, useRef, useEffect } from 'react';
+import ScrollAnimation from './ScrollAnimation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -73,21 +74,22 @@ export default function Team() {
   };
 
   return (
-    <section id="team" className="py-16 bg-blue-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10 text-blue-900">Contact Us</h2>
-
+    <section id="team" className="relative py-20 md:py-24 bg-transparent">
+      <ScrollAnimation>
+        <div className="container mx-auto px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h3 className="text-2xl font-semibold text-blue-800 mb-6">How to Contact Us</h3>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">Contact Us</h2>
 
-            <p className="text-gray-700 mb-6">
-              For all major inquiries please email: <a href="mailto:futureleadersinitiative0@gmail.com" className="text-blue-600 font-medium">futureleadersinitiative0@gmail.com</a>
+          <div className="glass-card rounded-2xl p-8 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-semibold text-white mb-6">How to Contact Us</h3>
+
+            <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+              For all major inquiries please email: <a href="mailto:futureleadersinitiative0@gmail.com" className="text-white font-medium hover:underline">futureleadersinitiative0@gmail.com</a>
             </p>
 
             <div className="mb-8">
-              <h4 className="text-xl font-semibold text-blue-800 mb-4">Connect With Us!</h4>
-              <p className="text-gray-700 mb-4">
+              <h4 className="text-xl font-semibold text-white mb-4">Connect With Us!</h4>
+              <p className="text-gray-300 mb-4 leading-relaxed">
                 Follow us on social media to stay updated with our latest events, success stories, and announcements! You can also reach out to us through these platforms for quick responses.
               </p>
               <div className="flex gap-6 justify-center">
@@ -108,10 +110,10 @@ export default function Team() {
                 action={formsparkEndpoint}
                 className="space-y-4"
               >
-                <h4 className="text-xl font-semibold text-blue-800 mb-3">Contact Form</h4>
+                <h4 className="text-xl font-semibold text-white mb-6">Contact Form</h4>
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-white mb-2">Name *</label>
                   <Input
                     id="name"
                     name="name"
@@ -121,7 +123,7 @@ export default function Team() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email *</label>
                   <Input
                     id="email"
                     name="email"
@@ -132,7 +134,7 @@ export default function Team() {
                 </div>
 
                 <div>
-                  <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-1">Topic *</label>
+                  <label htmlFor="topic" className="block text-sm font-medium text-white mb-2">Topic *</label>
                   <Input
                     id="topic"
                     name="topic"
@@ -142,7 +144,7 @@ export default function Team() {
                 </div>
 
                 <div>
-                  <label htmlFor="organization" className="block text-sm font-medium text-gray-700 mb-1">Organization (Optional)</label>
+                  <label htmlFor="organization" className="block text-sm font-medium text-white mb-2">Organization (Optional)</label>
                   <Input
                     id="organization"
                     name="organization"
@@ -151,7 +153,7 @@ export default function Team() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-white mb-2">Message *</label>
                   <Textarea
                     id="message"
                     name="message"
@@ -167,27 +169,28 @@ export default function Team() {
                 ></div>
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700"
+                  className="w-full bg-white hover:bg-gray-100 text-black"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             ) : (
-              <div className="text-center p-6 bg-green-50 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="text-center p-6 bg-gray-50 rounded-lg border border-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-white mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <h4 className="text-xl font-bold text-green-600 mb-2">Message Sent!</h4>
-                <p className="text-gray-700 mb-4">We've received your message and will respond shortly.</p>
-                <Button onClick={() => setIsSubmitted(false)} className="bg-blue-600 hover:bg-blue-700">
+                <h4 className="text-xl font-bold text-white mb-2">Message Sent!</h4>
+                <p className="text-gray-300 mb-4">We've received your message and will respond shortly.</p>
+                <Button onClick={() => setIsSubmitted(false)} className="bg-gray-900 hover:bg-gray-800 text-white">
                   Send Another Message
                 </Button>
               </div>
             )}
           </div>
         </div>
-      </div>
+        </div>
+      </ScrollAnimation>
     </section>
   );
 }

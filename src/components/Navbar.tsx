@@ -54,77 +54,65 @@ export default function Navbar() {
     if (isMenuOpen) setIsMenuOpen(false);
   };
 
+  // Smooth scroll to top handler
+  const handleScrollToTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isMenuOpen) setIsMenuOpen(false);
+  };
+
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-blue-900 shadow-lg' : 'bg-white shadow-md'
+    <nav className={`sticky top-4 z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'glass-nav rounded-2xl mx-4 md:mx-8 lg:mx-auto max-w-7xl' 
+        : 'glass-nav rounded-2xl mx-4 md:mx-8 lg:mx-auto max-w-7xl'
     }`}>
-      <div className="container mx-auto px-4 py-5">
+      <div className="container mx-auto px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
-          <div className={`flex items-center space-x-3 transition-all duration-300 ${
-            scrolled ? 'flex-grow justify-center' : ''
-          }`}>
-            <Image
-              src="/logo.png"
-              alt="FLI Logo"
-              width={48}
-              height={48}
-              className="hover:scale-105 transition-transform"
-            />
-            <Link href="/" className={`text-2xl font-bold transition-colors duration-300 ${
-              scrolled ? 'text-white' : 'text-blue-600'
-            }`}>
-              Future Leaders Initiative
+          <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3 group" onClick={handleScrollToTop}>
+              <Image
+                src="/logo.png"
+                alt="FLI Logo"
+                width={40}
+                height={40}
+                className="transition-transform group-hover:scale-105"
+              />
+              <span className="text-xl font-semibold text-white transition-colors">
+                Future Leaders Initiative
+              </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center space-x-6`}>
+          <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/#about"
-              className={`transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'about')}
             >
               Who We Are
             </Link>
             <Link
               href="/#classes"
-              className={`transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'classes')}
             >
               Classes
             </Link>
             <Link
               href="/#faq"
-              className={`transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'faq')}
             >
               FAQ
             </Link>
             <Button
-              variant="outline"
-              className={`text-lg py-6 font-bold shadow-lg border-2 transition-colors duration-200 ${
-                scrolled ? 'border-blue-400 bg-white text-blue-900 hover:bg-blue-100 hover:border-blue-500' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white bg-white'
-              }`}
-              style={scrolled ? { backgroundColor: '#fff', color: '#1e3a8a', borderColor: '#60a5fa', boxShadow: '0 2px 12px 0 rgba(59,130,246,0.10)' } : { color: '#2563eb', borderColor: '#2563eb' }}
+              className="bg-white text-black hover:bg-gray-100 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
               onClick={e => handleNav(e, 'registration')}
               asChild={false}
             >
               Register Now
-            </Button>
-            <Button
-              className={`text-lg py-6 ${
-                scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}
-              onClick={e => handleNav(e, 'donate')}
-              asChild={false}
-            >
-              Donate
             </Button>
           </div>
 
@@ -132,17 +120,15 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               type="button"
-              className={`transition-colors duration-300 ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-500 hover:text-blue-600'
-              }`}
+              className="text-gray-300 hover:text-white transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
@@ -152,48 +138,35 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className={`mt-4 md:hidden pb-4 space-y-4 ${
-            scrolled ? 'text-white' : ''
-          }`}>
+          <div className="mt-4 md:hidden pb-4 space-y-4 border-t border-white/20 pt-4">
             <Link
               href="/#about"
-              className={`block transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'about')}
             >
               Who We Are
             </Link>
             <Link
               href="/#classes"
-              className={`block transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'classes')}
             >
               Classes
             </Link>
             <Link
               href="/#faq"
-              className={`block transition duration-300 text-lg ${
-                scrolled ? 'text-white hover:text-blue-200' : 'text-gray-700 hover:text-blue-600'
-              }`}
+              className="block text-sm font-medium text-gray-300 hover:text-white transition-colors"
               onClick={e => handleNav(e, 'faq')}
             >
               FAQ
             </Link>
-            <div className="flex flex-col space-y-2">
-              <Button variant="outline" className={`w-full text-lg py-6 font-bold shadow-lg border-2 transition-colors duration-200 ${
-                scrolled ? 'border-blue-400 bg-white text-blue-900 hover:bg-blue-100 hover:border-blue-500' : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white bg-white'
-              }`} style={scrolled ? { backgroundColor: '#fff', color: '#1e3a8a', borderColor: '#60a5fa', boxShadow: '0 2px 12px 0 rgba(59,130,246,0.10)' } : { color: '#2563eb', borderColor: '#2563eb' }} onClick={e => handleNav(e, 'registration')} asChild={false}>
-                Register Now
-              </Button>
-              <Button className={`w-full text-lg py-6 ${
-                scrolled ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`} onClick={e => handleNav(e, 'donate')} asChild={false}>
-                Donate
-              </Button>
-            </div>
+            <Button
+              className="w-full bg-white text-black hover:bg-gray-100 px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:scale-105 shadow-lg"
+              onClick={e => handleNav(e, 'registration')}
+              asChild={false}
+            >
+              Register Now
+            </Button>
           </div>
         )}
       </div>
